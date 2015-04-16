@@ -6,6 +6,8 @@
 
 package projetjava;
 
+import GUI.GUI;
+
 /**
  *
  * @author short
@@ -15,9 +17,13 @@ public class ProjetJava {
     /**
      * @param args the command line arguments
      */
+    
+    // Voir si utile
+    
+    /*
     public static void main(String[] args) {
         // TODO code application logic here
-        System.out.println("COUCOU");
-    }
+        GUI fenetre = new GUI();
+    }*/
     
 }
