@@ -9,6 +9,6 @@ package GUI;
  *
  * @author Jack
  */
-public interface viewInterface {
+public interface viewInterface{
     
 }

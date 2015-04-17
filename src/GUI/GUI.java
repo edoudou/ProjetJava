@@ -44,9 +44,19 @@ public class GUI extends Application{
         stage.setScene(myScene);
         BorderPane layout = new BorderPane();
         
+        appViews = new viewInterface[5];
+        appViews[0] = new viewHome("Home","img/Hopital.jpg");
+        appViews[1] = new viewSearch();
+        appViews[2] = new viewSearch();
+        appViews[3] = new viewSearch();
+        appViews[4] = new viewSearch();
+        
         layout.setTop(myMenu);
+        layout.setCenter((Node)appViews[0]);
         root.getChildren().add(layout);
-        //root.getChildren().addAll(myMenu);
+        
+        
+        
 
         stage.show();
     }

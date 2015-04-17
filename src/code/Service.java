@@ -14,15 +14,15 @@ public class Service {
     private int code;
     private String nom;
     private String batiment;
-    private String Directeur;
+    private Docteur Directeur;
     private int chambre;
-    private int infirmier;
+    private Infirmier[] infirmier;
 
     public Service(){
         
     }
     
-    public Service(int code, String nom, String batiment, String Directeur, int chambre, int infirmier) {
+    public Service(int code, String nom, String batiment, Docteur Directeur, int chambre, Infirmier... infirmier) {
         this.code = code;
         this.nom = nom;
         this.batiment = batiment;
@@ -31,7 +31,7 @@ public class Service {
         this.infirmier = infirmier;
     }
 
-    public void setService(int code, String nom, String batiment, String Directeur, int chambre, int infirmier) {
+    public void setService(int code, String nom, String batiment, Docteur Directeur, int chambre, Infirmier... infirmier) {
         this.code = code;
         this.nom = nom;
         this.batiment = batiment;
@@ -51,7 +51,7 @@ public class Service {
         return batiment;
     }
 
-    public String getDirecteur() {
+    public Docteur getDirecteur() {
         return Directeur;
     }
 
@@ -59,7 +59,7 @@ public class Service {
         return chambre;
     }
 
-    public int getInfirmier() {
+    public Infirmier[] getInfirmier() {
         return infirmier;
     }   
 }
