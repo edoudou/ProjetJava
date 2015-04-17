@@ -9,7 +9,7 @@ package code;
  *
  * @author Robin
  */
-public class Personne {
+abstract public class Personne implements personneInterface{
     
     private int numero;
     private String nomp;
