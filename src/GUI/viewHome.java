@@ -33,7 +33,8 @@ public class viewHome extends View{
         super();
         this.name = name;
         ImageView myImg = new ImageView(new Image(url));
-        myImg.setFitHeight(this.getHeight());
+        myImg.setFitHeight(470);
+        myImg.setFitWidth(790);
         content.getChildren().add(myImg);
         this.setContent(content);
     }
