@@ -15,7 +15,7 @@ import javafx.scene.control.Button;
  */
 public class viewSearch extends View{
     
-    private Object[] tab;
+    private GUIComponent[] tab;
     private Button add,search;
 
     public viewSearch() {
@@ -29,47 +29,80 @@ public class viewSearch extends View{
         content.getChildren().add(search);
     }
     
-    
-    
-    public viewSearch(String name, Button add, Button search,Object[] tab) {
+    public viewSearch(String name, Button add, Button search,GUIComponent[] tab) {
         super();
         this.name = name;
         this.tab = tab;
         this.add = add;
         this.search = search;
     }
+    
+    public viewSearch(String name, Button add, Button search,Object[] tab) {
+        super();
+        this.name = name;
+        for(int i = 0;i < tab.length;i++)
+            this.tab[i] = new GUIComponent(tab[i],"");
+        
+        this.add = add;
+        this.search = search;
+    }
+    
     public viewSearch(String name,Object... tab) {
         super();
         this.name = name;
-        this.tab = tab;
+        for(int i = 0;i < tab.length;i++)
+            this.tab[i] = new GUIComponent(tab[i],"");
         this.add = new Button("Add");
         this.search = new Button("Search");
     }
 
-    public Object[] getTab() {
+    public GUIComponent[] getTab() {
         return tab;
     }
     
-    public Object getTabAtIndex(int i) {
+    public GUIComponent getTabAtIndex(int i) {
         return tab[i];
     }
+    
+    public GUIComponent getTabNamed(String name) {
+        for (GUIComponent tab1 : tab) {
+            if (tab1.getTitle().equals(name)) {
+                return tab1;
+            }
+        }
+        
+        return null;
+    }
 
-    public void setTab(Object[] tab) {
+    public void setTab(GUIComponent[] tab) {
         this.tab = tab;
     }
     
-    public void addToTab(Object... component){
-        Object[] tab_bis = tab;
+    public void addToTab(GUIComponent... component){
+        GUIComponent[] tab_bis = tab;
         
         int n = tab_bis.length;
         int k = component.length;
-        tab = new Object[n+k];
+        tab = new GUIComponent[n+k];
         
         for(int i = 0; i < n;i++)
             tab[i] = tab_bis[i];
         
         for(int i = 0; i < k;i++)
             tab[n+i] = component[i];
+    }
+    
+    public void addToTab(GUIComponent component,String title){
+        GUIComponent[] tab_bis = tab;
+        
+        int n = tab_bis.length;
+        tab = new GUIComponent[n + 1];
+        
+        for(int i = 0; i < n;i++)
+            tab[i] = tab_bis[i];
+        
+        
+        tab[n+1] = component;
     }
 
     public Button getAddButton() {

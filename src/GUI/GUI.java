@@ -5,14 +5,12 @@
  */
 package GUI;
 
+import Controler.controler;
 import javafx.application.*;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.*;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.stage.*;
 
@@ -27,6 +25,8 @@ public class GUI extends Application{
     private MenuBar myMenu;
     private Menu HomeMenu,ServiceMenu,DoctorMenu,InfirmierMenu,PatientMenu;
     private MenuItem HomeMenuItem,ServiceMenuItem,DoctorMenuItem,InfirmierMenuItem,PatientMenuItem;
+    private controler myControler;
+    
     public static void main(String[] args) {
         // TODO code application logic here
         launch(args);
@@ -34,6 +34,14 @@ public class GUI extends Application{
     
     public GUI() {
     
+    }
+
+    public viewInterface[] getAppViews() {
+        return appViews;
+    }
+
+    public void setAppViews(viewInterface[] appViews) {
+        this.appViews = appViews;
     }
     
     @Override
@@ -79,9 +87,10 @@ public class GUI extends Application{
         
         stage.show();
         
+        myControler = new controler(this);
+        
         
         HomeMenuItem.setOnAction((event) -> {
-            System.out.println("test");
             layout.setCenter((Node)appViews[0]);
         });
         
