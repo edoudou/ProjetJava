@@ -6,6 +6,7 @@
 package Controler;
 
 import GUI.GUI;
+import GUI.viewSearch;
 
 /**
  *
@@ -18,8 +19,8 @@ public final class controler {
     }
     
     public void init(GUI myGUI){
-        myGUI.getAppViews()[1].setAddButtonListener(new addMedecinListener());
-        myGUI.getAppViews()[1].setSearchButtonListener(new searchMedecinListener());
+        myGUI.getAppViews()[1].setAddButtonListener(new addMedecinListener((viewSearch) myGUI.getAppViews()[1]));
+        myGUI.getAppViews()[1].setSearchButtonListener(new searchMedecinListener((viewSearch) myGUI.getAppViews()[1]));
         
         myGUI.getAppViews()[2].setAddButtonListener(null);
         myGUI.getAppViews()[2].setSearchButtonListener(null);

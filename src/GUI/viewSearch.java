@@ -7,7 +7,9 @@ package GUI;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 
 /**
  *
@@ -35,6 +37,9 @@ public class viewSearch extends View{
         this.tab = tab;
         this.add = add;
         this.search = search;
+        
+        content.getChildren().add(add);
+        content.getChildren().add(search);
     }
     
     public viewSearch(String name, Button add, Button search,Object[] tab) {
@@ -45,6 +50,9 @@ public class viewSearch extends View{
         
         this.add = add;
         this.search = search;
+        
+        content.getChildren().add(add);
+        content.getChildren().add(search);
     }
     
     public viewSearch(String name,Object... tab) {
@@ -78,21 +86,32 @@ public class viewSearch extends View{
         this.tab = tab;
     }
     
+    @Override
     public void addToTab(GUIComponent... component){
+        int n;
         GUIComponent[] tab_bis = tab;
-        
-        int n = tab_bis.length;
         int k = component.length;
+        
+        if(tab_bis != null){
+            n = tab_bis.length;    
+        }
+        else n =0;
+        
+        
         tab = new GUIComponent[n+k];
         
         for(int i = 0; i < n;i++)
-            tab[i] = tab_bis[i];
+                tab[i] = tab_bis[i];
         
-        for(int i = 0; i < k;i++)
+        for(int i = 0; i < k;i++){
             tab[n+i] = component[i];
+            content.getChildren().add(new Label(tab[n+i].getTitle() + " :"));
+            content.getChildren().add((Node)tab[n+i].getData());
+        }
+        
     }
     
-    public void addToTab(GUIComponent component,String title){
+    public void addToTab(Object component,String title){
         GUIComponent[] tab_bis = tab;
         
         int n = tab_bis.length;
@@ -102,7 +121,7 @@ public class viewSearch extends View{
             tab[i] = tab_bis[i];
         
         
-        tab[n+1] = component;
+        tab[n+1] = new GUIComponent(component,title);
     }
 
     public Button getAddButton() {
@@ -113,6 +132,7 @@ public class viewSearch extends View{
         this.add = add;
     }
     
+    @Override
     public void setAddButtonListener(EventHandler<ActionEvent> actionToPerform){
         add.setOnAction(actionToPerform);
     }

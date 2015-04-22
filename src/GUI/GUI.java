@@ -11,6 +11,7 @@ import javafx.scene.*;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.stage.*;
 
@@ -85,6 +86,13 @@ public class GUI extends Application{
         layout.setCenter((Node)appViews[0]);
         root.getChildren().add(layout);
         
+        
+        
+        appViews[1].addToTab(new GUIComponent(new TextField(),"Name")/*,
+                             new GUIComponent(,""),
+                             new GUIComponent(,""),
+                             new GUIComponent(,"")*/);
+        
         stage.show();
         
         myControler = new controler(this);
@@ -110,6 +118,7 @@ public class GUI extends Application{
             layout.setCenter((Node)appViews[4]);
         }
         );
+        
     }
     
 }

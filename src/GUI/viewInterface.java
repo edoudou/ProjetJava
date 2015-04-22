@@ -15,7 +15,7 @@ import javafx.event.EventHandler;
 public interface viewInterface{
     
     public void addToTab(GUIComponent... component);
-    public void addToTab(GUIComponent component,String title);
+    public void addToTab(Object component,String title);
     public void setAddButtonListener(EventHandler<ActionEvent> actionToPerform);
     public void setSearchButtonListener(EventHandler<ActionEvent> actionToPerform);
 }

@@ -5,8 +5,10 @@
  */
 package Controler;
 
+import GUI.viewSearch;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.control.TextField;
 
 /**
  *
@@ -14,9 +16,21 @@ import javafx.event.EventHandler;
  */
 public class searchMedecinListener implements EventHandler<ActionEvent>{
 
+    viewSearch DoctorView;
+    
+    public searchMedecinListener() {
+    }
+
+    public searchMedecinListener(viewSearch DoctorView) {
+        this.DoctorView = DoctorView;
+    }
+    
     @Override
     public void handle(ActionEvent t) {
-        System.out.println("To Do search Medecin");
+        TextField NameField = (TextField) DoctorView.getTabNamed("Name").getData();
+        String Name = NameField.getText();
+        
+        System.out.println("To Do search Medecin named "+ Name);
     }
     
 }
