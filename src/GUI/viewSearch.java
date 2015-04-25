@@ -10,6 +10,8 @@ import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 
 /**
  *
@@ -19,16 +21,26 @@ public class viewSearch extends View{
     
     private GUIComponent[] tab;
     private Button add,search;
+    protected VBox bottomContent;
 
     public viewSearch() {
         super();
         this.add = new Button("Add");
         this.search = new Button("Search");
         
-        this.setContent(content);
+        bottomContent = new VBox();
         
-        content.getChildren().add(add);
-        content.getChildren().add(search);
+        bottomContent.getChildren().addAll(add,search);
+        
+        BorderPane layout = new BorderPane();
+        
+        layout.setCenter(content);
+        layout.setBottom(bottomContent);
+        
+        this.setContent(layout);
+        
+        
+        
     }
     
     public viewSearch(String name, Button add, Button search,GUIComponent[] tab) {

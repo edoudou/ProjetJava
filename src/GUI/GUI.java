@@ -7,7 +7,9 @@ package GUI;
 
 import Controler.controler;
 import javafx.application.*;
+import javafx.collections.FXCollections;
 import javafx.scene.*;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
@@ -88,10 +90,52 @@ public class GUI extends Application{
         
         
         
-        appViews[1].addToTab(new GUIComponent(new TextField(),"Name")/*,
-                             new GUIComponent(,""),
-                             new GUIComponent(,""),
-                             new GUIComponent(,"")*/);
+        appViews[1].addToTab(new GUIComponent(new TextField(),"Nom"),
+                             new GUIComponent(new TextField(),"Prenom"),
+                             new GUIComponent(new TextField(),"Numero"),
+                             new GUIComponent(new TextField(),"Adresse"),
+                             new GUIComponent(new ComboBox(
+                                    FXCollections.observableArrayList(
+                                            "Anesthesiste",
+                                            "Cardiologue",
+                                            "Generaliste",
+                                            "Orthopediste",
+                                            "Pneumologue",
+                                            "Traumatologue"
+                                            )),"Specialité"));
+        
+        appViews[2].addToTab(new GUIComponent(new TextField(),"Nom"),
+                             new GUIComponent(new TextField(),"Prenom"),
+                             new GUIComponent(new TextField(),"Numero"),
+                             new GUIComponent(new TextField(),"Adresse"),
+                             new GUIComponent(new TextField(),"Mutuelle"));
+        
+        appViews[3].addToTab(new GUIComponent(new TextField(),"Nom"),
+                             new GUIComponent(new TextField(),"Prenom"),
+                             new GUIComponent(new TextField(),"Numero"),
+                             new GUIComponent(new TextField(),"Adresse"),
+                             new GUIComponent(new TextField(),"Salaire"),
+                             new GUIComponent(new ComboBox(
+                                    FXCollections.observableArrayList(
+                                            "Anesthesiste",
+                                            "Cardiologue",
+                                            "Generaliste",
+                                            "Orthopediste",
+                                            "Pneumologue",
+                                            "Traumatologue"
+                                            )),"Service"));
+        
+        appViews[4].addToTab(new GUIComponent(new ComboBox(
+                                    FXCollections.observableArrayList(
+                                            "Anesthesiste",
+                                            "Cardiologue",
+                                            "Generaliste",
+                                            "Orthopediste",
+                                            "Pneumologue",
+                                            "Traumatologue"
+                                            )),"Nom"),
+                             new GUIComponent(new TextField(),"Batiment"),
+                             new GUIComponent(new TextField(),"Directeur"));
         
         stage.show();
         

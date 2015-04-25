@@ -8,6 +8,7 @@ package Controler;
 import GUI.viewSearch;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
 /**
@@ -29,9 +30,24 @@ public class addMedecinListener implements EventHandler<ActionEvent>{
     
     @Override
     public void handle(ActionEvent t) {
-        TextField NameField = (TextField) DoctorView.getTabNamed("Name").getData();
-        String Name = NameField.getText();
-        System.out.println("To Do add Medecin named " + Name);
+        String Nom = null,Prenom = null,Tel = null,Adresse = null,spe = null;
+        
+        TextField Field = (TextField) DoctorView.getTabNamed("Nom").getData();
+        if(Field!=null) Nom = Field.getText();
+        
+        Field = (TextField) DoctorView.getTabNamed("Prenom").getData();
+        if(Field!=null) Prenom = Field.getText();
+        
+        Field = (TextField) DoctorView.getTabNamed("Numero").getData();
+        if(Field!=null) Tel = Field.getText();
+        
+        Field = (TextField) DoctorView.getTabNamed("Adresse").getData();
+        if(Field!=null) Adresse = Field.getText();
+        
+        ComboBox combo = (ComboBox) DoctorView.getTabNamed("Specialité").getData();
+        if(combo!=null)spe = (String) combo.getValue();
+        
+        System.out.println("To Do add Medecin named " + Nom + Prenom + " Tel : " + Tel +"/"+ Adresse+"/"+spe);
         
     }
     

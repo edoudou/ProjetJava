@@ -15,35 +15,35 @@ import javafx.scene.control.TextField;
  *
  * @author Jack
  */
-public class searchMedecinListener implements EventHandler<ActionEvent>{
+public class searchPatientListener implements EventHandler<ActionEvent>{
 
-    viewSearch DoctorView;
+    viewSearch PatientView;
     
-    public searchMedecinListener() {
+    public searchPatientListener() {
     }
 
-    public searchMedecinListener(viewSearch DoctorView) {
-        this.DoctorView = DoctorView;
+    public searchPatientListener(viewSearch PatientView) {
+        this.PatientView = PatientView;
     }
     
     @Override
     public void handle(ActionEvent t) {
-        String Nom = null,Prenom = null,Tel = null,Adresse = null,spe =null;
+        String Nom = null,Prenom = null,Tel = null,Adresse = null,Mutuelle = null;
         
-        TextField Field = (TextField) DoctorView.getTabNamed("Nom").getData();
+        TextField Field = (TextField) PatientView.getTabNamed("Nom").getData();
         if(Field!=null) Nom = Field.getText();
         
-        Field = (TextField) DoctorView.getTabNamed("Prenom").getData();
+        Field = (TextField) PatientView.getTabNamed("Prenom").getData();
         if(Field!=null) Prenom = Field.getText();
         
-        Field = (TextField) DoctorView.getTabNamed("Numero").getData();
+        Field = (TextField) PatientView.getTabNamed("Numero").getData();
         if(Field!=null) Tel = Field.getText();
         
-        Field = (TextField) DoctorView.getTabNamed("Adresse").getData();
+        Field = (TextField) PatientView.getTabNamed("Adresse").getData();
         if(Field!=null) Adresse = Field.getText();
         
-        ComboBox combo = (ComboBox) DoctorView.getTabNamed("Specialité").getData();
-        if(combo!=null)spe = (String) combo.getValue();
+        Field = (TextField) PatientView.getTabNamed("Mutuelle").getData();
+        if(Field!=null) Mutuelle = Field.getText();
         
         System.out.println("To Do search Medecin named " + Nom + Prenom + " Tel : " + Tel + "/"+ Adresse);
     }
