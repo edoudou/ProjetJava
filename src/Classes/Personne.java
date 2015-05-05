@@ -27,6 +27,13 @@ abstract public class Personne implements personneInterface{
         this.tel = tel;
         this.adresse = adresse;
     }
+
+    public Personne(int numero, String nomp, String prenomp) {
+        this.numero = numero;
+        this.nomp = nomp;
+        this.prenomp = prenomp;
+    }
+    
      public void setPersonne(int numero, String nomp, String prenomp, int tel, String adresse) {
         this.numero = numero;
         this.nomp = nomp;
