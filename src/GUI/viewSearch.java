@@ -38,9 +38,6 @@ public class viewSearch extends View{
         layout.setBottom(bottomContent);
         
         this.setContent(layout);
-        
-        
-        
     }
     
     public viewSearch(String name, Button add, Button search,GUIComponent[] tab) {

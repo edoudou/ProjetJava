@@ -25,6 +25,7 @@ import javafx.stage.*;
 public class GUI extends Application{
 
     private viewInterface[] appViews;
+    private viewResult result;
     private MenuBar myMenu;
     private Menu HomeMenu,ServiceMenu,DoctorMenu,InfirmierMenu,PatientMenu;
     private MenuItem HomeMenuItem,ServiceMenuItem,DoctorMenuItem,InfirmierMenuItem,PatientMenuItem;
@@ -83,6 +84,8 @@ public class GUI extends Application{
         appViews[2] = new viewSearch();
         appViews[3] = new viewSearch();
         appViews[4] = new viewSearch();
+        
+        result = new viewResult();
         
         layout.setTop(myMenu);
         layout.setCenter((Node)appViews[0]);
@@ -143,7 +146,7 @@ public class GUI extends Application{
         
         
         HomeMenuItem.setOnAction((event) -> {
-            layout.setCenter((Node)appViews[0]);
+            layout.setCenter((Node)result);
         });
         
         DoctorMenu.setOnAction((event)->{

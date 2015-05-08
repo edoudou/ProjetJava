@@ -14,7 +14,12 @@ public class Patient extends Personne {
     private String mutuelle;
 
     public Patient (){
-        
+        mutuelle = "";
+        int numero = 0;
+        String nomp = "";
+        String prenomp ="";
+        int tel = 0;
+        String adresse= "";
     }
     
     public Patient(String mutuelle, int numero, String nomp, String prenomp, int tel, String adresse) {
