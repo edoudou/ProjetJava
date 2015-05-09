@@ -5,9 +5,13 @@
  */
 package Controler;
 
+import Classes.Docteur;
+import GUI.GUI;
 import GUI.viewSearch;
+import Modele.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
@@ -18,12 +22,20 @@ import javafx.scene.control.TextField;
 public class searchMedecinListener implements EventHandler<ActionEvent>{
 
     viewSearch DoctorView;
+    GUI myGUI;
+    connexion myCo;
     
     public searchMedecinListener() {
     }
 
     public searchMedecinListener(viewSearch DoctorView) {
         this.DoctorView = DoctorView;
+    }
+    
+    public searchMedecinListener(viewSearch DoctorView,GUI myGUI,connexion myCo) {
+        this.DoctorView = DoctorView;
+        this.myGUI = myGUI;
+        this.myCo = myCo;
     }
     
     @Override
@@ -46,6 +58,15 @@ public class searchMedecinListener implements EventHandler<ActionEvent>{
         if(combo!=null)spe = (String) combo.getValue();
         
         System.out.println("To Do search Medecin named " + Nom + Prenom + " Tel : " + Tel + "/"+ Adresse);
+        
+        Docteur[] doc = myCo.SearchDoctor("SELECT * FROM docteur d JOIN employe e ON d.numero = e.numero");
+        
+        if(doc!=null)
+        {
+            myGUI.getResult().setDoctorResult(doc);
+        
+            myGUI.getLayout().setCenter((Node)myGUI.getResult());
+        }
     }
     
 }

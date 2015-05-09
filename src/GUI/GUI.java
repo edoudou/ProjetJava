@@ -30,6 +30,7 @@ public class GUI extends Application{
     private Menu HomeMenu,ServiceMenu,DoctorMenu,InfirmierMenu,PatientMenu;
     private MenuItem HomeMenuItem,ServiceMenuItem,DoctorMenuItem,InfirmierMenuItem,PatientMenuItem;
     private controler myControler;
+    private BorderPane layout;
     
     public static void main(String[] args) {
         // TODO code application logic here
@@ -76,7 +77,7 @@ public class GUI extends Application{
         StackPane root = new StackPane();
         Scene myScene = new Scene(root, 800, 500);
         stage.setScene(myScene);
-        BorderPane layout = new BorderPane();
+        layout = new BorderPane();
         
         appViews = new viewInterface[5];
         appViews[0] = new viewHome("Home","img/Hopital.jpg");
@@ -166,6 +167,18 @@ public class GUI extends Application{
         }
         );
         
+    }
+
+    public BorderPane getLayout() {
+        return layout;
+    }
+
+    public viewResult getResult() {
+        return result;
+    }
+
+    public void setResult(viewResult result) {
+        this.result = result;
     }
     
 }

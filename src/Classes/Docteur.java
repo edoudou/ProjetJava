@@ -33,6 +33,11 @@ public class Docteur extends Employe {
     public void setPatientTab(Patient[] patientTab) {
         this.patientTab = patientTab;
     }
+    
+    public Docteur(String Spe, int numero, String nomp, String prenomp, int tel, String adresse) {
+        super(numero, nomp, prenomp, tel, adresse);
+        this.Spe = Spe;
+    }
 
     public Docteur(String Spe, int numero, String nomp, String prenomp, int tel, String adresse,Patient[] patientTab) {
         super(numero, nomp, prenomp, tel, adresse);

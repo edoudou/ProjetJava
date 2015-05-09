@@ -7,20 +7,25 @@ package Controler;
 
 import GUI.GUI;
 import GUI.viewSearch;
+import Modele.connexion;
 
 /**
  *
  * @author Jack
  */
 public final class controler {
-
+    
+    connexion myCo;
+    
     public controler(GUI myGUI) {
+        myCo = new connexion();
+        
         init(myGUI);
     }
     
     public void init(GUI myGUI){
         myGUI.getAppViews()[1].setAddButtonListener(new addMedecinListener((viewSearch) myGUI.getAppViews()[1]));
-        myGUI.getAppViews()[1].setSearchButtonListener(new searchMedecinListener((viewSearch) myGUI.getAppViews()[1]));
+        myGUI.getAppViews()[1].setSearchButtonListener(new searchMedecinListener((viewSearch) myGUI.getAppViews()[1],myGUI,myCo));
         
         myGUI.getAppViews()[2].setAddButtonListener(new addPatientListener((viewSearch) myGUI.getAppViews()[2]));
         myGUI.getAppViews()[2].setSearchButtonListener(new searchPatientListener((viewSearch) myGUI.getAppViews()[2]));
