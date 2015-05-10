@@ -94,7 +94,15 @@ public class SearchSQL {
             first = false;
         }
         return requete;
-    }   
+    }
+    
+    public String SearchDocteurOf(int id) {
+        String requete;
+        boolean first = true;
+        requete = "SELECT * FROM docteur d JOIN soigne s ON d.numero = no_docteur WHERE no_malade = " + id;
+        
+        return requete;
+    }
     
     public String SearchPatient(String Nom,String Prenom,String Tel,String Adresse,String Mutuelle) {
         String requete;
@@ -131,7 +139,15 @@ public class SearchSQL {
             first = false;
         }
         return requete;
-    }  
+    }
+    
+    public String SearchPatientOf(int id) {
+        String requete;
+        boolean first = true;
+        requete = "SELECT * FROM malade p JOIN soigne s ON p.numero = no_malade WHERE no_docteur = " + id;
+        
+        return requete;
+    }
     
     public String SearchChambre (String Numero_chambre,String service,String Surveillant,String nb_lits) {
         String requete;

@@ -80,6 +80,8 @@ public final class viewResult extends View{
         tab = docTab;
         
         table.getColumns().clear();
+        data.getChildren().clear();
+        
         nomCol = new TableColumn("Nom");
         prenomCol = new TableColumn("Prenom");
         table.getColumns().addAll(nomCol,prenomCol);
@@ -101,18 +103,26 @@ public final class viewResult extends View{
     
     public void setDoctorData(Docteur doc){
         data.getChildren().clear();
-        data.getChildren().addAll(new Label("Nom : "+doc.getNomp()),new Label("Prenom : "+doc.getPrenomp()),new Label("Adresse : "+doc.getAdresse()));
-        Button del = new Button("Supprimer");
-        del.setOnMouseClicked((event)->{
-            control.suppDocteur(doc.getNumero());
-        });
-        data.getChildren().add(del);
+        if(doc!=null){
+            data.getChildren().addAll(new Label("Nom : "+doc.getNomp()),new Label("Prenom : "+doc.getPrenomp()),new Label("Adresse : "+doc.getAdresse()));
+            Button getP = new Button("Voir les Patients");
+            getP.setOnMouseClicked((event)->{
+                control.getPatientOf(doc.getNumero());
+            });
+            Button del = new Button("Supprimer");
+            del.setOnMouseClicked((event)->{
+                control.suppDocteur(doc.getNumero());
+            });
+            data.getChildren().addAll(getP,del);
+        }
     }
 
     public void setInfirmierResult(Infirmier... infTab){
         tab = infTab;
         
         table.getColumns().clear();
+        data.getChildren().clear();
+        
         nomCol = new TableColumn("Nom");
         prenomCol = new TableColumn("Prenom");
         table.getColumns().addAll(nomCol,prenomCol);
@@ -134,13 +144,22 @@ public final class viewResult extends View{
     
     public void setInfirmierData(Infirmier inf){
         data.getChildren().clear();
-        data.getChildren().addAll(new Label("Nom : "+inf.getNomp()),new Label("Prenom : "+inf.getPrenomp()),new Label("Adresse : "+inf.getAdresse()));
+        if(inf!=null){
+            data.getChildren().addAll(new Label("Nom : "+inf.getNomp()),new Label("Prenom : "+inf.getPrenomp()),new Label("Adresse : "+inf.getAdresse()));
+            Button del = new Button("Supprimer");
+            del.setOnMouseClicked((event)->{
+                control.suppDocteur(inf.getNumero());
+            });
+            data.getChildren().add(del);
+        }
     }
     
     public void setPatientResult(Patient... patTab){
         tab = patTab;
         
         table.getColumns().clear();
+        data.getChildren().clear();
+        
         nomCol = new TableColumn("Nom");
         prenomCol = new TableColumn("Prenom");
         table.getColumns().addAll(nomCol,prenomCol);
@@ -162,13 +181,26 @@ public final class viewResult extends View{
     
     public void setPatientData(Patient pat){
         data.getChildren().clear();
-        data.getChildren().addAll(new Label("Nom : "+pat.getNomp()),new Label("Prenom : "+pat.getPrenomp()),new Label("Adresse : "+pat.getAdresse()));
+        if(pat!=null){
+            data.getChildren().addAll(new Label("Nom : "+pat.getNomp()),new Label("Prenom : "+pat.getPrenomp()),new Label("Adresse : "+pat.getAdresse()));
+            Button getDoc = new Button("Voir le(s) Docteur(s)");
+            getDoc.setOnMouseClicked((event)->{
+                control.getDoctorOf(pat.getNumero());
+            });
+            Button del = new Button("Supprimer");
+            del.setOnMouseClicked((event)->{
+                control.suppDocteur(pat.getNumero());
+            });
+            data.getChildren().addAll(getDoc,del);
+        }
     }
     
     public void setServiceResult(Service... servTab){
         tab = servTab;
         
         table.getColumns().clear();
+        data.getChildren().clear();
+        
         nomCol = new TableColumn("Code");
         prenomCol = new TableColumn("Nom");
         table.getColumns().addAll(nomCol,prenomCol);
@@ -190,7 +222,7 @@ public final class viewResult extends View{
     
     public void setServiceData(Service serv){
         data.getChildren().clear();
-        data.getChildren().addAll(new Label("Nom : "+serv.getNom()),new Label("Batiment : "+serv.getBatiment()));
+        if(serv!=null)data.getChildren().addAll(new Label("Nom : "+serv.getNom()),new Label("Batiment : "+serv.getBatiment()));
     }
     
     @Override

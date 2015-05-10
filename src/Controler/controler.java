@@ -5,9 +5,11 @@
  */
 package Controler;
 
+import Classes.*;
 import GUI.GUI;
 import GUI.viewSearch;
 import Modele.*;
+import javafx.scene.Node;
 
 /**
  *
@@ -18,10 +20,11 @@ public final class controler {
     connexion myCo;
     SearchSQL searchGen = new SearchSQL();
     DeleteSQL deleteGen = new DeleteSQL();
+    GUI myGUI;
     
     public controler(GUI myGUI) {
         myCo = new connexion();
-        
+        this.myGUI = myGUI;
         init(myGUI);
     }
     
@@ -44,5 +47,51 @@ public final class controler {
         req = deleteGen.DeleteDocteur(id);
         for(int i = 0; i < req.length ; i++)
             myCo.updateData(req[i]);
+    }
+    
+    public void suppPatient(int id){
+        String req;
+        req = deleteGen.DeletePatient(id);
+        
+        myCo.updateData(req);
+    }
+    
+    public void suppInfirmier(int id){
+        String[] req;
+        req = deleteGen.DeleteInfirmier(id);
+        for(int i = 0; i < req.length ; i++)
+            myCo.updateData(req[i]);
+    }
+    
+    /*public void suppService(int id){
+        String[] req;
+        req = deleteGen.DeleteService(id);
+        for(int i = 0; i < req.length ; i++)
+            myCo.updateData(req[i]);
+    }*/
+    
+    public void getPatientOf(int id)
+    {
+        String req = searchGen.SearchPatientOf(id);
+        
+        Patient[] pat = myCo.SearchPatient(req);
+        if(pat!=null)
+        {
+            myGUI.getResult().setPatientResult(pat);
+        
+            myGUI.getLayout().setCenter((Node)myGUI.getResult());
+        }
+    }
+    public void getDoctorOf(int id)
+    {
+        String req = searchGen.SearchDocteurOf(id);
+        
+        Docteur[] doc = myCo.SearchDoctor(req);
+        if(doc!=null)
+        {
+            myGUI.getResult().setDoctorResult(doc);
+        
+            myGUI.getLayout().setCenter((Node)myGUI.getResult());
+        }
     }
 }
