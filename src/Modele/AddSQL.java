@@ -14,8 +14,8 @@ import java.sql.*;
  * @author Juju
  */
 public class AddSQL {
-
     
+
     // Ajout dans table employé
     public String addEmploye(String Nom, String Prenom, String Tel, String Adresse){
         String requete;

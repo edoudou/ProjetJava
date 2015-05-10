@@ -19,7 +19,7 @@ abstract public class Personne implements personneInterface{
 
     public Personne(){
         
-    }
+    }    
     public Personne(int numero, String nomp, String prenomp, int tel, String adresse) {
         this.numero = numero;
         this.nomp = nomp;
