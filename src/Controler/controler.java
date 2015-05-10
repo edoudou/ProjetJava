@@ -38,4 +38,7 @@ public final class controler {
         myGUI.getAppViews()[4].setSearchButtonListener(new searchServiceListener((viewSearch) myGUI.getAppViews()[4],myGUI,myCo,searchGen));
     }
     
+    public void suppDocteur(int id){
+        
+    }
 }
