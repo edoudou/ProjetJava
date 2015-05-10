@@ -6,8 +6,7 @@
 package Controler;
 
 import Classes.*;
-import GUI.GUI;
-import GUI.viewSearch;
+import GUI.*;
 import Modele.*;
 import javafx.scene.Node;
 
@@ -40,6 +39,10 @@ public final class controler {
         
         myGUI.getAppViews()[4].setAddButtonListener(new addServiceListener((viewSearch) myGUI.getAppViews()[4]));
         myGUI.getAppViews()[4].setSearchButtonListener(new searchServiceListener((viewSearch) myGUI.getAppViews()[4],myGUI,myCo,searchGen));
+        
+        
+        viewHome home = (viewHome) myGUI.getAppViews()[0];
+        home.setConnexionListener(new setLinkListener(myCo,(viewHome) myGUI.getAppViews()[0]));
     }
     
     public void suppDocteur(int id){
@@ -55,6 +58,8 @@ public final class controler {
         
         myCo.updateData(req);
     }
+    
+    
     
     public void suppInfirmier(int id){
         String[] req;

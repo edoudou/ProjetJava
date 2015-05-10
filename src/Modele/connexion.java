@@ -7,6 +7,9 @@ package Modele;
 
 import Classes.*;
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import jdbc2014.SSHTunnel;
 
 /**
  *
@@ -14,6 +17,7 @@ import java.sql.*;
  */
 public class connexion {
     Connection link = null;
+    SSHTunnel ssh;
     public connexion(){
         
         /* Chargement du driver JDBC pour MySQL */
@@ -23,9 +27,10 @@ public class connexion {
             System.out.println("Probleme de driver");
         }
         try {
-            link = DriverManager.getConnection("jdbc:mysql://localhost/test","root","");
+            //link = DriverManager.getConnection("jdbc:mysql://localhost/test","root","");
             //link = DriverManager.getConnection("jdbc:mysql://srv-webA2.ece.fr","short-rw","lzYKntDA");
-            
+            //setLinkECE("short","34694462@ZERed","lzYKntDA");
+            setLink();
         } catch (SQLException ex) {
             System.out.println("Probleme de connexion a la base de donnée");
         }
@@ -149,5 +154,28 @@ public class connexion {
             System.out.println("Probleme durant la mise a jour de données");
             return false;
         }
+    }
+    
+    public void setLinkECE(String User,String MDP,String MDPSQL) throws SQLException{
+        ssh = new SSHTunnel(User,MDP);
+        if (ssh.connect()) {
+            System.out.println("Connexion reussie");
+
+            // url de connexion "jdbc:mysql://localhost:3305/usernameECE"
+            String urlDatabase = "jdbc:mysql://localhost:3305/" + User;
+            
+            //création d'une connexion JDBC à la base
+            link = DriverManager.getConnection(urlDatabase, User+"-rw" , MDPSQL);
+        }
+    }
+    
+    public void setLink(Connection link){
+        this.link = link;
+
+    }
+    
+    public void setLink() throws SQLException{
+        link = DriverManager.getConnection("jdbc:mysql://localhost/test","root","");
+
     }
 }

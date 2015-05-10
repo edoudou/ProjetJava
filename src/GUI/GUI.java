@@ -80,7 +80,7 @@ public class GUI extends Application{
         layout = new BorderPane();
         
         appViews = new viewInterface[5];
-        appViews[0] = new viewHome("Home","img/Hopital.jpg");
+        appViews[0] = new viewHome("Home");
         appViews[1] = new viewSearch();
         appViews[2] = new viewSearch();
         appViews[3] = new viewSearch();
@@ -142,12 +142,17 @@ public class GUI extends Application{
                              new GUIComponent(new TextField(),"Directeur"));
         
         stage.show();
+        
+        stage.setOnCloseRequest((event) -> {
+            System.out.println("Stage is closing");
+        });
+        
         myControler = new controler(this);
         
         result.setControl(myControler);
         
         HomeMenuItem.setOnAction((event) -> {
-            layout.setCenter((Node)result);
+            layout.setCenter((Node)appViews[0]);
         });
         
         DoctorMenu.setOnAction((event)->{
@@ -180,5 +185,6 @@ public class GUI extends Application{
     public void setResult(viewResult result) {
         this.result = result;
     }
+    
     
 }

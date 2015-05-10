@@ -19,7 +19,7 @@ public class SearchSQL {
     public String SearchInfirmier (String Nom,String Prenom,String Tel,String Adresse,String Salaire,String service) {
         String requete;
         boolean first = true;
-        requete = "SELECT * FROM Infirmier i JOIN Employe e ON i.numero=e.numero";
+        requete = "SELECT * FROM infirmier i JOIN employe e ON i.numero=e.numero";
         if(!Nom.isEmpty()){
             if(first) requete += " WHERE e.nom LIKE ";
             else requete += " AND e.nom LIKE ";
@@ -62,7 +62,7 @@ public class SearchSQL {
     public String SearchDocteur(String Nom,String Prenom,String Tel,String Adresse,String spe) {
         String requete;
         boolean first = true;
-        requete = "SELECT * FROM docteur d JOIN Employe e ON d.numero=e.numero";
+        requete = "SELECT * FROM docteur d JOIN employe e ON d.numero=e.numero";
         if(!Nom.isEmpty()){
             if(first) requete += " WHERE e.nom LIKE ";
             else requete += " AND e.nom LIKE ";

@@ -7,6 +7,10 @@ package GUI;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -16,16 +20,52 @@ import javafx.scene.image.ImageView;
  */
 public class viewHome extends View{
 
+    private TextField User;
+    private PasswordField MDP,MDPSQL;
+    private Button connect;
+    
     public viewHome() {
         super();
         name = "Home";
         
+        User = new TextField();
+        MDP = new PasswordField();
+        MDPSQL = new PasswordField();
+        connect = new Button("Connexion");
+        
+        content.getChildren().addAll(new Label(""),User,new Label(""),MDP,new Label(""),MDPSQL,connect);
+        
         this.setContent(content);
     }
     
+    public TextField getUser() {
+        return User;
+    }
+
+
+    public PasswordField getMDP() {
+        return MDP;
+    }
+     
+    public PasswordField getMDPSQL() {
+        return MDPSQL;
+    }
+
+    public Button getConnect() {
+        return connect;
+    }
+ 
     public viewHome(String name) {
         super();
         this.name = name;
+        
+        User = new TextField();
+        MDP = new PasswordField();
+        MDPSQL = new PasswordField();
+        
+        connect = new Button("Connexion");
+        
+        content.getChildren().addAll(new Label(""),User,new Label(""),MDP,new Label(""),MDPSQL,connect);
         
         this.setContent(content);
         
@@ -41,6 +81,11 @@ public class viewHome extends View{
         this.setContent(content);*/
     }
 
+    
+    public void setConnexionListener(EventHandler<ActionEvent> actionToPerform){
+        connect.setOnAction(actionToPerform);
+    }
+    
     @Override
     public void addToTab(GUIComponent... component) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
