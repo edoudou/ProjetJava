@@ -17,6 +17,7 @@ public final class controler {
     
     connexion myCo;
     SearchSQL searchGen = new SearchSQL();
+    DeleteSQL deleteGen = new DeleteSQL();
     
     public controler(GUI myGUI) {
         myCo = new connexion();
@@ -39,6 +40,9 @@ public final class controler {
     }
     
     public void suppDocteur(int id){
-        
+        String[] req;
+        req = deleteGen.DeleteDocteur(id);
+        for(int i = 0; i < req.length ; i++)
+            myCo.updateData(req[i]);
     }
 }

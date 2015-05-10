@@ -139,4 +139,15 @@ public class connexion {
         
         return null;
     }
+    
+    public boolean updateData(String req){
+        try {
+            Statement requete = link.createStatement();
+            requete.executeQuery(req);
+            return true;
+        } catch (SQLException ex) {
+            System.out.println("Probleme durant la mise a jour de données");
+            return false;
+        }
+    }
 }

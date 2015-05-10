@@ -142,9 +142,9 @@ public class GUI extends Application{
                              new GUIComponent(new TextField(),"Directeur"));
         
         stage.show();
-        
         myControler = new controler(this);
         
+        result.setControl(myControler);
         
         HomeMenuItem.setOnAction((event) -> {
             layout.setCenter((Node)result);

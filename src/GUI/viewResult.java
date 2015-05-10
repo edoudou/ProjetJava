@@ -6,11 +6,13 @@
 package GUI;
 
 import Classes.*;
+import Controler.controler;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -29,8 +31,11 @@ public final class viewResult extends View{
     private TableView table;
     private TableColumn nomCol,prenomCol;
     private VBox data,tableBox;
+    private controler control;
 
     public viewResult() {
+        
+        
         pane = new TilePane();
         pane.setPrefColumns(2);
         pane.setPrefRows(1);
@@ -44,7 +49,6 @@ public final class viewResult extends View{
         pane.getChildren().add(tableBox);
         pane.getChildren().add(data);
         
-        
         this.setContent(pane);
         
         
@@ -55,11 +59,21 @@ public final class viewResult extends View{
         Doc2.setDocteur("Ca", 0, "Moi","Oui Moi", 023452432, "1321",new Patient[0]);
         setDoctorResult(Doc1,Doc2);
     }
+    
+    public viewResult(controler c) {
+        super();
+        
+        control = c;
+    }
 
     public viewResult(Object[] tab) {
         this();
         
         this.tab = tab;
+    }
+
+    public void setControl(controler control) {
+        this.control = control;
     }
     
     public void setDoctorResult(Docteur... docTab){
@@ -88,6 +102,11 @@ public final class viewResult extends View{
     public void setDoctorData(Docteur doc){
         data.getChildren().clear();
         data.getChildren().addAll(new Label("Nom : "+doc.getNomp()),new Label("Prenom : "+doc.getPrenomp()),new Label("Adresse : "+doc.getAdresse()));
+        Button del = new Button("Supprimer");
+        del.setOnMouseClicked((event)->{
+            control.suppDocteur(doc.getNumero());
+        });
+        data.getChildren().add(del);
     }
 
     public void setInfirmierResult(Infirmier... infTab){
