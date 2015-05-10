@@ -74,8 +74,6 @@ public class connexion {
                 
                 if(tabCopy!=null)System.arraycopy(tabCopy, 0, tabInf, 0, n-1);
                 
-                System.out.println("test");
-                
                 tabInf[n-1] = new Infirmier(result.getString("code_service"),result.getString("rotation"),result.getDouble("salaire"),result.getInt("numero"),result.getString("nom"),result.getString("prenom"),result.getInt("tel"),result.getString("adresse"));
                 
             }
@@ -89,4 +87,56 @@ public class connexion {
         return null;
     }
     
+    public Patient[] SearchPatient(String req){
+        Patient[] tabPat;
+        try {
+            Statement requete = link.createStatement();
+            ResultSet result = requete.executeQuery(req);
+            
+            
+            tabPat = null;
+            for(int n = 1; result.next() ;n++){
+                Patient[] tabCopy = tabPat;
+                tabPat = new Patient[n];
+                
+                if(tabCopy!=null)System.arraycopy(tabCopy, 0, tabPat, 0, n-1);
+                
+                tabPat[n-1] = new Patient(result.getString("mutuelle"),result.getInt("numero"),result.getString("nom"),result.getString("prenom"),result.getInt("tel"),result.getString("adresse"));
+            }
+            
+            return tabPat;
+            
+        } catch (SQLException ex) {
+            System.out.println("Probleme de Creation de requete");
+        }
+        
+        return null;
+    }
+    
+    public Service[] SearchService(String req){
+        Service[] tabPat;
+        try {
+            Statement requete = link.createStatement();
+            ResultSet result = requete.executeQuery(req);
+            
+            
+            
+            tabPat = null;
+            for(int n = 1; result.next() ;n++){
+                Service[] tabCopy = tabPat;
+                tabPat = new Service[n];
+                
+                if(tabCopy!=null)System.arraycopy(tabCopy, 0, tabPat, 0, n-1);
+                
+                tabPat[n-1] = new Service(result.getString("code"),result.getString("nom"),result.getString("batiment"),null,0,null);
+            }
+            
+            return tabPat;
+            
+        } catch (SQLException ex) {
+            System.out.println("Probleme de Creation de requete");
+        }
+        
+        return null;
+    }
 }

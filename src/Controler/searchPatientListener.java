@@ -5,13 +5,14 @@
  */
 package Controler;
 
+import Classes.*;
 import GUI.GUI;
 import GUI.viewSearch;
 import Modele.SearchSQL;
 import Modele.connexion;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.control.ComboBox;
+import javafx.scene.Node;
 import javafx.scene.control.TextField;
 
 /**
@@ -30,6 +31,13 @@ public class searchPatientListener implements EventHandler<ActionEvent>{
 
     public searchPatientListener(viewSearch PatientView) {
         this.PatientView = PatientView;
+    }
+
+    public searchPatientListener(viewSearch PatientView, GUI myGUI, connexion myCo, SearchSQL search) {
+        this.PatientView = PatientView;
+        this.myGUI = myGUI;
+        this.myCo = myCo;
+        this.search = search;
     }
     
     @Override
@@ -51,7 +59,18 @@ public class searchPatientListener implements EventHandler<ActionEvent>{
         Field = (TextField) PatientView.getTabNamed("Mutuelle").getData();
         if(Field!=null) Mutuelle = Field.getText();
         
-        System.out.println("To Do search Medecin named " + Nom + Prenom + " Tel : " + Tel + "/"+ Adresse);
+        String req = search.SearchPatient(Nom, Prenom, Tel, Adresse,Mutuelle);
+        
+        System.out.println(req);
+        
+        Patient[] pat = myCo.SearchPatient(req);
+        
+        if(pat!=null)
+        {
+            myGUI.getResult().setPatientResult(pat);
+        
+            myGUI.getLayout().setCenter((Node)myGUI.getResult());
+        }
     }
     
 }

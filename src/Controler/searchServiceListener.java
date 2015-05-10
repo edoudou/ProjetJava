@@ -5,12 +5,14 @@
  */
 package Controler;
 
+import Classes.*;
 import GUI.GUI;
 import GUI.viewSearch;
 import Modele.SearchSQL;
 import Modele.connexion;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
@@ -31,6 +33,13 @@ public class searchServiceListener implements EventHandler<ActionEvent>{
     public searchServiceListener(viewSearch ServiceView) {
         this.ServiceView = ServiceView;
     }
+
+    public searchServiceListener(viewSearch ServiceView, GUI myGUI, connexion myCo, SearchSQL search) {
+        this.ServiceView = ServiceView;
+        this.myGUI = myGUI;
+        this.myCo = myCo;
+        this.search = search;
+    }
     
     @Override
     public void handle(ActionEvent t) {
@@ -45,7 +54,18 @@ public class searchServiceListener implements EventHandler<ActionEvent>{
         ComboBox combo = (ComboBox) ServiceView.getTabNamed("Nom").getData();
         if(combo!=null)Nom = (String) combo.getValue();
         
-        System.out.println("To Do search Service named " + Nom );
+        String req = search.SearchService(Nom,Batiment,Directeur,"");
+        
+        System.out.println(req);
+        
+        Service[] pat = myCo.SearchService(req);
+        
+        if(pat!=null)
+        {
+            myGUI.getResult().setServiceResult(pat);
+        
+            myGUI.getLayout().setCenter((Node)myGUI.getResult());
+        }
     }
     
 }

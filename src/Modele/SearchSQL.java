@@ -35,7 +35,7 @@ public class SearchSQL {
         if(!Tel.isEmpty()){
             if(first) requete += " WHERE e.tel = ";
             else requete += " AND e.tel =";
-            requete+="%"+Tel+"%";
+            requete+=Tel;
             first = false;
         }
         if(!Adresse.isEmpty()){
@@ -47,7 +47,7 @@ public class SearchSQL {
         if(!Salaire.isEmpty()){
             if(first) requete += " WHERE i.salaire = ";
             else requete += " AND i.salaire = ";
-            requete+="%"+Salaire+"%";
+            requete+=Salaire;
             first = false;
         }
         if(service!=null && !service.isEmpty()){
@@ -78,7 +78,7 @@ public class SearchSQL {
         if(!Tel.isEmpty()){
             if(first) requete += " WHERE e.tel = ";
             else requete += " AND e.tel =";
-            requete+="%"+Tel+"%";
+            requete+=Tel;
             first = false;
         }
         if(!Adresse.isEmpty()){
@@ -99,35 +99,35 @@ public class SearchSQL {
     public String SearchPatient(String Nom,String Prenom,String Tel,String Adresse,String Mutuelle) {
         String requete;
         boolean first = true;
-        requete = "SELECT * FROM patient p JOIN Employe e ON p.numero=e.numero";
+        requete = "SELECT * FROM malade p";
         if(!Nom.isEmpty()){
-            if(first) requete += " WHERE e.nom LIKE";
-            else requete += " AND e.nom LIKE";
-            requete+= "%"+Nom+"%";
+            if(first) requete += " WHERE nom LIKE";
+            else requete += " AND nom LIKE";
+            requete+= "'%"+Nom+"%'";
             first = false;
         }
         if(!Prenom.isEmpty()){
-            if(first) requete += " WHERE e.prenom LIKE ";
-            else requete += " AND e.prenom LIKE";
-            requete+="%"+Prenom+"%";
+            if(first) requete += " WHERE prenom LIKE ";
+            else requete += " AND prenom LIKE";
+            requete+="'%"+Prenom+"%'";
             first = false;
         }
         if(!Tel.isEmpty()){
-            if(first) requete += " WHERE e.tel = ";
-            else requete += " AND e.tel =";
-            requete+="%"+Tel+"%";
+            if(first) requete += " WHERE tel = ";
+            else requete += " AND tel = ";
+            requete+= Tel;
             first = false;
         }
         if(!Adresse.isEmpty()){
-            if(first) requete += " WHERE e.adresse LIKE ";
-            else requete += " AND e.adresse LIKE ";
-            requete+="%"+Adresse+"%";
+            if(first) requete += " WHERE adresse LIKE ";
+            else requete += " AND adresse LIKE ";
+            requete+="'%"+Adresse+"%'";
             first = false;
         }
         if(!Mutuelle.isEmpty()){
-            if(first) requete += " WHERE p.mutuelle = ";
-            else requete += " AND p.mutuelle = ";
-            requete+="%"+Mutuelle+"%";
+            if(first) requete += " WHERE mutuelle LIKE ";
+            else requete += " AND mutuelle LIKE ";
+            requete+="'%"+Mutuelle+"%'";
             first = false;
         }
         return requete;
@@ -161,7 +161,7 @@ public class SearchSQL {
         String requete;
         boolean first = true;
         requete = "SELECT * FROM service s";
-        if(!Nom.isEmpty()){
+        if(Nom!=null&&!Nom.isEmpty()){
             if(first) requete += " WHERE s.nom LIKE ";
             else requete += " AND s.nom LIKE";
             requete+="%"+Nom+"%";

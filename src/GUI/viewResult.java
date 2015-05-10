@@ -38,7 +38,7 @@ public final class viewResult extends View{
         table = new TableView();
         tableBox = new VBox();
         data = new VBox();
-        data.setStyle("-fx-border-width: 3;-fx-border-color: black;");
+        data.setStyle("-fx-border-width: 3;-fx-border-color: black;-fx-pref-width : 50%");
         
         tableBox.getChildren().add(table);
         pane.getChildren().add(tableBox);
@@ -150,8 +150,8 @@ public final class viewResult extends View{
         tab = servTab;
         
         table.getColumns().clear();
-        nomCol = new TableColumn("Nom");
-        prenomCol = new TableColumn("Prenom");
+        nomCol = new TableColumn("Code");
+        prenomCol = new TableColumn("Nom");
         table.getColumns().addAll(nomCol,prenomCol);
         
         nomCol.setCellValueFactory(

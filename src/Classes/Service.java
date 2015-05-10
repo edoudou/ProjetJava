@@ -11,7 +11,7 @@ package Classes;
  */
 public class Service {
     
-    private int code;
+    private String code;
     private String nom;
     private String batiment;
     private Docteur Directeur;
@@ -22,7 +22,7 @@ public class Service {
         
     }
     
-    public Service(int code, String nom, String batiment, Docteur Directeur, int chambre, Infirmier... infirmier) {
+    public Service(String code, String nom, String batiment, Docteur Directeur, int chambre, Infirmier... infirmier) {
         this.code = code;
         this.nom = nom;
         this.batiment = batiment;
@@ -31,7 +31,7 @@ public class Service {
         this.infirmier = infirmier;
     }
 
-    public void setService(int code, String nom, String batiment, Docteur Directeur, int chambre, Infirmier... infirmier) {
+    public void setService(String code, String nom, String batiment, Docteur Directeur, int chambre, Infirmier... infirmier) {
         this.code = code;
         this.nom = nom;
         this.batiment = batiment;
@@ -40,7 +40,7 @@ public class Service {
         this.infirmier = infirmier;
     }
     
-    public int getCode() {
+    public String getCode() {
         return code;
     }
     public String getNom() {
