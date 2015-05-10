@@ -29,10 +29,11 @@ public class DeleteSQL {
         return requete;
     }   
     
-    public String DeletePatient(int id) {
-        String requete;
+    public String[] DeletePatient(int id) {
+        String[] requete = new String[2];
         
-        requete = "DELETE FROM malade WHERE numero = " + id;        
+        requete[0] = "DELETE FROM malade WHERE numero = " + id;
+        requete[1] = DeleteHospi(id);
         
         return requete;
     }  
@@ -56,7 +57,7 @@ public class DeleteSQL {
         return requete;
     }*/
     
-    public String DeleteHospi(String id) {
+    public String DeleteHospi(int id) {
         String requete;
         
         requete = "DELETE FROM hospitalisation WHERE no_malade = " + id;

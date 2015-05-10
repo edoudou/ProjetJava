@@ -19,11 +19,10 @@ public class UpdateSQL {
         requete = " UPDATE employe SET nom = '"+ Nom +"', " +
                 " prenom = '"+ Prenom +"', " +
                	" adresse = '"+Adresse+"', " +
-                " tel = "+Tel+", " +
+                " tel = "+Tel+" " +
             	" WHERE numero = "+id+"; " ;
                     
         return requete;
-            
     }
     
     // Modification dans la table infirmier
@@ -31,7 +30,7 @@ public class UpdateSQL {
                 
         String requete;
         requete = " UPDATE infirmier SET code_service = '"+service+"', " +
-                " salaire = "+Salaire+", " +
+                " salaire = "+Salaire+" " +
             	" WHERE numero = "+id+"; " ;
                     
         return requete;        
@@ -43,7 +42,7 @@ public class UpdateSQL {
     public String updateDocteur(String spe, int id){                
         
         String requete;
-        requete = " UPDATE docteur SET specialite = '"+spe+"', " +                
+        requete = " UPDATE docteur SET specialite = '"+spe+"' " +                
             	" WHERE numero = "+id+"; " ;
                     
         return requete;          
@@ -57,7 +56,7 @@ public class UpdateSQL {
                 " prenom = '"+ Prenom +"', " +
                	" adresse = '"+Adresse+"', " +
                 " tel = "+Tel+", " +
-                " mutuelle = '"+Mutuelle+"', " +
+                " mutuelle = '"+Mutuelle+"' " +
             	" WHERE numero = "+id+" ;";
                     
         return requete;
@@ -70,7 +69,7 @@ public class UpdateSQL {
         String requete;
         requete = " UPDATE hospitalisation SET code_service = '"+ Code_service +"', " +
                 " no_chambre = '"+ Numero_chambre +"', " +
-                " lit = "+Lit+", " +
+                " lit = "+Lit+" " +
             	" WHERE no_malade = "+Numero_malade+" ;";
                     
         return requete;

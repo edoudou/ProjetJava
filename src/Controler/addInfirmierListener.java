@@ -6,6 +6,9 @@
 package Controler;
 
 import GUI.viewSearch;
+import Modele.AddSQL;
+import Modele.SearchSQL;
+import Modele.connexion;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.ComboBox;
@@ -18,8 +21,21 @@ import javafx.scene.control.TextField;
 public class addInfirmierListener implements EventHandler<ActionEvent>{
 
     viewSearch InfirmierView;
+    AddSQL add;
+    connexion myCo;
     
     public addInfirmierListener() {
+    }
+
+    public addInfirmierListener(viewSearch InfirmierView, AddSQL add) {
+        this.InfirmierView = InfirmierView;
+        this.add = add;
+    }
+
+    public addInfirmierListener(viewSearch InfirmierView, AddSQL add, connexion myCo) {
+        this.InfirmierView = InfirmierView;
+        this.add = add;
+        this.myCo = myCo;
     }
 
     public addInfirmierListener(viewSearch InfirmierView) {
@@ -50,7 +66,13 @@ public class addInfirmierListener implements EventHandler<ActionEvent>{
         ComboBox combo = (ComboBox) InfirmierView.getTabNamed("Service").getData();
         if(combo!=null)service = (String) combo.getValue();
         
-        System.out.println("To Do add Medecin named " + Nom + Prenom + " Tel : " + Tel +"/"+ Adresse);
+        if(Nom!=null&&Prenom!=null&&Tel != null&&Adresse != null&&Salaire != null&&service != null
+                &&!Nom.isEmpty()&&!Prenom.isEmpty()&&!Tel.isEmpty()&&!Adresse.isEmpty()&&!Salaire.isEmpty()&&!service.isEmpty())
+        {
+            String[] req = add.addInfirmier(Nom, Prenom, Tel, Adresse, Salaire, service);
+            for(int i = 0;i < req.length;i++)
+                myCo.updateData(req[i]);
+        }
         
     }
     

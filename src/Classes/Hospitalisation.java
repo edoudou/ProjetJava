@@ -11,8 +11,7 @@ package Classes;
  */
 public class Hospitalisation {
     
-    private int Numero_malade;
-    private String Code_service;
+    private String service;
     private int Numero_chambre;
     private int Lit;
 
@@ -20,26 +19,22 @@ public class Hospitalisation {
         
     }
     
-    public Hospitalisation(int Numero_malade, String Code_service, int Numero_chambre,int Lit) {
-        this.Numero_malade = Numero_malade;
-        this.Code_service = Code_service;
+    public Hospitalisation( String Code_service, int Numero_chambre,int Lit) {
+        
+        this.service = Code_service;
         this.Numero_chambre = Numero_chambre;
         this.Lit = Lit;
     }
     
-    public void setHospitalisation(int Numero_malade, String Code_service, int Numero_chambre,int Lit) {
-        this.Numero_malade = Numero_malade;
-        this.Code_service = Code_service;
+    public void setHospitalisation(String Code_service, int Numero_chambre,int Lit) {
+        this.service = Code_service;
         this.Numero_chambre = Numero_chambre;
         this.Lit = Lit;
     }
 
-    public int getNumero_malade() {
-        return Numero_malade;
-    }
 
     public String getCodeService() {
-        return Code_service;
+        return service;
     }
     
     public int getNumero_chambre() {

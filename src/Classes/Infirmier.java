@@ -14,6 +14,18 @@ public class Infirmier extends Employe {
     private String Service;
     private String rotation;
     private double salaire;
+
+    public String getService() {
+        return Service;
+    }
+
+    public String getRotation() {
+        return rotation;
+    }
+
+    public double getSalaire() {
+        return salaire;
+    }
     
     public Infirmier(){
         

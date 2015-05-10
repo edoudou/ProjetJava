@@ -9,6 +9,8 @@ import Classes.*;
 import GUI.*;
 import Modele.*;
 import javafx.scene.Node;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
 
 /**
  *
@@ -17,7 +19,9 @@ import javafx.scene.Node;
 public final class controler {
     
     connexion myCo;
+    AddSQL addGen = new AddSQL();
     SearchSQL searchGen = new SearchSQL();
+    UpdateSQL updateGen = new UpdateSQL();
     DeleteSQL deleteGen = new DeleteSQL();
     GUI myGUI;
     
@@ -25,6 +29,8 @@ public final class controler {
         myCo = new connexion();
         this.myGUI = myGUI;
         init(myGUI);
+        
+        addGen.defineAI(myCo.getA_I()+1);
     }
     
     public void init(GUI myGUI){
@@ -34,7 +40,7 @@ public final class controler {
         myGUI.getAppViews()[2].setAddButtonListener(new addPatientListener((viewSearch) myGUI.getAppViews()[2]));
         myGUI.getAppViews()[2].setSearchButtonListener(new searchPatientListener((viewSearch) myGUI.getAppViews()[2],myGUI,myCo,searchGen));
         
-        myGUI.getAppViews()[3].setAddButtonListener(new addInfirmierListener((viewSearch) myGUI.getAppViews()[3]));
+        myGUI.getAppViews()[3].setAddButtonListener(new addInfirmierListener((viewSearch) myGUI.getAppViews()[3],addGen,myCo));
         myGUI.getAppViews()[3].setSearchButtonListener(new searchInfirmierListener((viewSearch) myGUI.getAppViews()[3],myGUI,myCo,searchGen));
         
         myGUI.getAppViews()[4].setAddButtonListener(new addServiceListener((viewSearch) myGUI.getAppViews()[4]));
@@ -53,10 +59,10 @@ public final class controler {
     }
     
     public void suppPatient(int id){
-        String req;
+        String[] req;
         req = deleteGen.DeletePatient(id);
-        
-        myCo.updateData(req);
+        for(int i = 0; i < req.length ; i++)
+            myCo.updateData(req[i]);
     }
     
     
@@ -99,4 +105,23 @@ public final class controler {
             myGUI.getLayout().setCenter((Node)myGUI.getResult());
         }
     }
+    
+    public void updateInf(int id,String nom,String prenom,String adresse,String tel,String salaire,String service){
+        String req;
+        req = updateGen.updateEmploye(nom, prenom, tel, adresse, id);
+        myCo.updateData(req);
+        
+        req = updateGen.updateInfirmier(salaire, service, id);
+        myCo.updateData(req);
+    }
+    
+    public void updateDoc(int id,String nom,String prenom,String adresse,String tel,String spe){
+        String req;
+        req = updateGen.updateEmploye(nom, prenom, tel, adresse, id);
+        myCo.updateData(req);
+        
+        req = updateGen.updateDocteur(spe, id);
+        myCo.updateData(req);
+    }
+
 }

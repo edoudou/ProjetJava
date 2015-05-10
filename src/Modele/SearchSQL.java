@@ -51,8 +51,8 @@ public class SearchSQL {
             first = false;
         }
         if(service!=null && !service.isEmpty()){
-            if(first) requete += " WHERE i.service LIKE ";
-            else requete += " AND i.service LIKE";
+            if(first) requete += " WHERE i.code_service LIKE ";
+            else requete += " AND i.code_service LIKE";
             requete+="'%"+service+"%'";
         }
         return requete;
@@ -105,34 +105,36 @@ public class SearchSQL {
     public String SearchPatient(String Nom,String Prenom,String Tel,String Adresse,String Mutuelle) {
         String requete;
         boolean first = true;
-        requete = "SELECT * FROM malade p";
+        requete = "SELECT * FROM malade m LEFT JOIN (hospitalisation h JOIN service s ON h.code_service = s.code)ON m.numero = h.no_malade";
         if(!Nom.isEmpty()){
-            if(first) requete += " WHERE nom LIKE";
-            else requete += " AND nom LIKE";
+            if(first) requete += " WHERE m.nom LIKE";
+            else requete += " AND m.nom LIKE";
             requete+= "'%"+Nom+"%'";
             first = false;
         }
+        
         if(!Prenom.isEmpty()){
-            if(first) requete += " WHERE prenom LIKE ";
-            else requete += " AND prenom LIKE";
+            if(first) requete += " WHERE m.prenom LIKE ";
+            else requete += " AND m.prenom LIKE";
             requete+="'%"+Prenom+"%'";
             first = false;
         }
+        
         if(!Tel.isEmpty()){
-            if(first) requete += " WHERE tel = ";
-            else requete += " AND tel = ";
+            if(first) requete += " WHERE m.tel = ";
+            else requete += " AND m.tel = ";
             requete+= Tel;
             first = false;
         }
         if(!Adresse.isEmpty()){
-            if(first) requete += " WHERE adresse LIKE ";
-            else requete += " AND adresse LIKE ";
+            if(first) requete += " WHERE m.adresse LIKE ";
+            else requete += " AND m.adresse LIKE ";
             requete+="'%"+Adresse+"%'";
             first = false;
         }
         if(!Mutuelle.isEmpty()){
-            if(first) requete += " WHERE mutuelle LIKE ";
-            else requete += " AND mutuelle LIKE ";
+            if(first) requete += " WHERE m.mutuelle LIKE ";
+            else requete += " AND m.mutuelle LIKE ";
             requete+="'%"+Mutuelle+"%'";
         }
         return requete;

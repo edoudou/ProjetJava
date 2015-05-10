@@ -100,12 +100,9 @@ public class GUI extends Application{
                              new GUIComponent(new TextField(),"Adresse"),
                              new GUIComponent(new ComboBox(
                                     FXCollections.observableArrayList(
-                                            "Anesthesiste",
-                                            "Cardiologue",
-                                            "Generaliste",
-                                            "Orthopediste",
-                                            "Pneumologue",
-                                            "Traumatologue"
+                                            "CAR",
+                                            "CHG",
+                                            "REA"
                                             )),"Specialité"));
         
         appViews[2].addToTab(new GUIComponent(new TextField(),"Nom"),
@@ -121,12 +118,9 @@ public class GUI extends Application{
                              new GUIComponent(new TextField(),"Salaire"),
                              new GUIComponent(new ComboBox(
                                     FXCollections.observableArrayList(
-                                            "Anesthesiste",
-                                            "Cardiologue",
-                                            "Generaliste",
-                                            "Orthopediste",
-                                            "Pneumologue",
-                                            "Traumatologue"
+                                            "CAR",
+                                            "CHG",
+                                            "REA"
                                             )),"Service"));
         
         appViews[4].addToTab(new GUIComponent(new ComboBox(

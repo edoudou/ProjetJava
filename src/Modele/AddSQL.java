@@ -15,67 +15,110 @@ import java.sql.*;
  */
 public class AddSQL {
     
+    int A_I = -1;
+    
+    public void defineAI(int max){
+        if(A_I<max)A_I = max;
+        System.out.println(A_I);
+    }
 
     public String addEmploye(String Nom, String Prenom, String Tel, String Adresse){
         String requete;
-        requete = "INSERT INTO employe (nom, prenom, adresse, tel) VALUES ( ";
-       
+        requete = "INSERT INTO employe (numero";
         if (!Nom.isEmpty()) {
-            requete += "'"+Nom+"',";            
+            requete += ",nom";
         }
-        else requete += "NULL,";
-        
+
         if (!Prenom.isEmpty()) {
-            requete += "'"+Prenom+"',";            
+            requete += ",prenom";
         }
-        else requete += "NULL,";
-        
+
         if (!Adresse.isEmpty()) {
-            requete += "'"+Adresse+"',";            
+            requete += ",adresse";
         }
-        else requete += "NULL,";
-        
+
         if (!Tel.isEmpty()) {
-            requete += ""+Tel+");";            
+            requete += ",tel";
         }
-        else requete += "NULL);";
-                      
+        
+                
+        requete+=") VALUES ( ";
+        
+        requete += ""+A_I+"";
+
+        if (!Nom.isEmpty()) {
+            requete += ",'"+Nom+"'";
+        }
+
+        if (!Prenom.isEmpty()) {
+            requete += ",'"+Prenom+"'";
+        }
+
+        if (!Adresse.isEmpty()) {
+            requete += ",'"+Adresse+"'";
+        }
+
+        if (!Tel.isEmpty()) {
+            requete += ","+Tel+"";
+        }
+        requete +=");";
+
         return requete;
             
     }
     
     // Ajout dans table infirmier
-    public String addInfirmier(String Salaire, String service, int id){        
+    public String[] addInfirmier(String Nom, String Prenom, String Tel, String Adresse,String Salaire, String service){        
+        String[] requete = new String[2];   
+        requete[0] = addEmploye(Nom,Prenom,Tel,Adresse);
+        
+        requete[1] = "INSERT INTO infirmier (numero";
                 
-        String requete = "INSERT INTO infimier (numero, code_service, salaire) VALUES ( ";       
+        if (service != null && !service.isEmpty()) {
+            requete[1] += ",code_service";
+        }
+
+        if (!Salaire.isEmpty()) {
+            requete[1] += ",salaire";
+        }
+                
+        requete[1] +=") VALUES ( ";
            
-        requete += ""+id+",";       
+        requete[1] += ""+A_I+"";
              
         if (service != null && !service.isEmpty()) {
-            requete += "'"+service+"',";            
+            requete[1] += ",'"+service+"'";            
         }
-        else requete += "NULL,";
         
         if (!Salaire.isEmpty()) {
-            requete += ""+Salaire+");";            
+            requete[1] += ","+Salaire+"";
         }
-        else requete += "NULL );";
+        requete[1]+= ");";
+        A_I++;
         
         return requete;     
     } 
     
     
     // Ajout dans table docteur
-    public String addDocteur(String spe, int id){        
-                
-        String requete = "INSERT INTO docteur (numero, specialite) VALUES ( ";       
-           
-        requete += ""+id+",";                 
-            
-        if (!spe.isEmpty()) {
-            requete += ""+spe+");";            
+    public String[] addDocteur(String Nom, String Prenom, String Tel, String Adresse,String spe){        
+        String[] requete = new String[2];   
+        requete[0] = addEmploye(Nom,Prenom,Tel,Adresse);
+        requete[1] = "INSERT INTO docteur (numero";
+        if (spe!=null&&spe.isEmpty()) {
+            requete[1] += ",specialite";            
         }
-        else requete += "NULL );";        
+        requete[1]+= ") VALUES ( ";       
+           
+        requete[1] += ""+A_I+"";                 
+            
+        if (spe!=null&&spe.isEmpty()) {
+            requete[1] += ",'"+spe+"'";            
+        }
+        
+        requete[1] += ");";
+        
+        A_I++;
         
         return requete;            
     }    
@@ -83,8 +126,9 @@ public class AddSQL {
     // Ajout dans la table malade
     public String addPatient(String Nom,String Prenom,String Tel,String Adresse,String Mutuelle){        
                 
-        String requete = "INSERT INTO malade (nom, prenom, adresse, tel, mutuelle) VALUES ( ";       
-          
+        String requete = "INSERT INTO malade (numero,nom, prenom, adresse, tel, mutuelle) VALUES ( ";       
+        
+        requete += ""+A_I+",";
         
         if (!Nom.isEmpty()) {
             requete += "'"+Nom+"',";            
@@ -110,6 +154,8 @@ public class AddSQL {
             requete += "'"+Mutuelle+"');";            
         }
         else requete += "NULL);"; 
+        
+        A_I++;
         
         return requete;
     }  

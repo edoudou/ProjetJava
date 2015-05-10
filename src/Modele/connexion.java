@@ -106,7 +106,8 @@ public class connexion {
                 
                 if(tabCopy!=null)System.arraycopy(tabCopy, 0, tabPat, 0, n-1);
                 
-                tabPat[n-1] = new Patient(result.getString("mutuelle"),result.getInt("numero"),result.getString("nom"),result.getString("prenom"),result.getInt("tel"),result.getString("adresse"));
+                if(result.getString("h.no_malade")==null)tabPat[n-1] = new Patient(result.getString("m.mutuelle"),result.getInt("m.numero"),result.getString("m.nom"),result.getString("m.prenom"),result.getInt("m.tel"),result.getString("m.adresse"));
+                else tabPat[n-1] = new Patient(result.getString("m.mutuelle"),new Hospitalisation(result.getString("s.nom"),result.getInt("h.no_chambre"),result.getInt("h.lit")),result.getInt("m.numero"),result.getString("m.nom"),result.getString("m.prenom"),result.getInt("m.tel"),result.getString("m.adresse"));
             }
             
             return tabPat;
@@ -147,6 +148,7 @@ public class connexion {
     
     public boolean updateData(String req){
         try {
+            System.out.println(req);
             Statement requete = link.createStatement();
             requete.executeUpdate(req);
             return true;
@@ -177,5 +179,28 @@ public class connexion {
     public void setLink() throws SQLException{
         link = DriverManager.getConnection("jdbc:mysql://localhost/test","root","");
 
+    }
+    
+    public int getA_I(){
+        int maxE,maxM;
+        try {
+            Statement requete = link.createStatement();
+            ResultSet result = requete.executeQuery("SELECT max(numero) FROM malade");
+            result.next();
+            maxM = result.getInt("max(numero)");
+            
+            ResultSet result2 = requete.executeQuery("SELECT max(numero) FROM employe");
+            result2.next();
+            maxE = result2.getInt("max(numero)");
+            
+            if(maxM < maxE)
+                return maxE;
+            else
+                return maxM;
+            
+        } catch (SQLException ex) {
+            System.out.println("Probleme de Creation de requete");
+        }
+        return -1;
     }
 }

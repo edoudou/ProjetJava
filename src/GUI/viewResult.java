@@ -16,6 +16,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
@@ -145,10 +146,30 @@ public final class viewResult extends View{
     public void setInfirmierData(Infirmier inf){
         data.getChildren().clear();
         if(inf!=null){
-            data.getChildren().addAll(new Label("Nom : "+inf.getNomp()),new Label("Prenom : "+inf.getPrenomp()),new Label("Adresse : "+inf.getAdresse()));
+            TextField nom,prenom,adresse,salaire,tel,service;
+            nom = new TextField();
+            nom.setText(inf.getNomp());
+            prenom = new TextField();
+            prenom.setText(inf.getPrenomp());
+            adresse = new TextField();
+            adresse.setText(inf.getAdresse());
+            salaire = new TextField();
+            salaire.setText(String.valueOf(inf.getSalaire()));
+            tel = new TextField();
+            tel.setText(String.valueOf(inf.getTel()));
+            service = new TextField();
+            service.setText(inf.getService());
+            
+            data.getChildren().addAll(new Label("Nom : "),nom,new Label("Prenom : "),prenom,new Label("Adresse : "),adresse,new Label("Salaire : "),salaire,tel,service);
+            Button up = new Button("Update");
+            up.setOnMouseClicked((event)->{
+                control.updateInf(inf.getNumero(),nom.getText(),prenom.getText(),adresse.getText(),tel.getText(),salaire.getText(),service.getText());
+            });
+            data.getChildren().add(up);
+            
             Button del = new Button("Supprimer");
             del.setOnMouseClicked((event)->{
-                control.suppDocteur(inf.getNumero());
+                control.suppInfirmier(inf.getNumero());
             });
             data.getChildren().add(del);
         }
@@ -183,6 +204,8 @@ public final class viewResult extends View{
         data.getChildren().clear();
         if(pat!=null){
             data.getChildren().addAll(new Label("Nom : "+pat.getNomp()),new Label("Prenom : "+pat.getPrenomp()),new Label("Adresse : "+pat.getAdresse()));
+            if(pat.getHospital()!=null)data.getChildren().addAll(new Label("Service : "+pat.getHospital().getCodeService()),new Label("Chambre : "+pat.getHospital().getNumero_chambre()),new Label("Lit : "+pat.getHospital().getNumero_chambre()));
+            
             Button getDoc = new Button("Voir le(s) Docteur(s)");
             getDoc.setOnMouseClicked((event)->{
                 control.getDoctorOf(pat.getNumero());
