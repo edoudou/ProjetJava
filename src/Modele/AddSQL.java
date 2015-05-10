@@ -16,24 +16,24 @@ import java.sql.*;
 public class AddSQL {
 
     
-    public String addInfirmier(String Nom, String Prenom, String Tel, String Adresse, String Salaire, String service){
-        
-        String requete = "INSERT INTO employe (nom, prenom, adresse, tel) VALUES ( ";
+    public String addEmploye(String Nom, String Prenom, String Tel, String Adresse){
+        String requete;
+        requete = "INSERT INTO employe (nom, prenom, adresse, tel) VALUES ( ";
        
         if (!Nom.isEmpty()) {
-            requete += ""+Nom+",";
+            requete += "'"+Nom+"',";
             
         }
         else requete += "NULL,";
         
         if (!Prenom.isEmpty()) {
-            requete += ""+Prenom+",";
+            requete += "'"+Prenom+"',";
             
         }
         else requete += "NULL,";
         
         if (!Adresse.isEmpty()) {
-            requete += ""+Adresse+",";
+            requete += "'"+Adresse+"',";
             
         }
         else requete += "NULL,";
@@ -44,8 +44,7 @@ public class AddSQL {
         }
         else requete += "NULL";
         
-        requete += ");";
-        
+        requete+= ");";
         
         return requete;
             
