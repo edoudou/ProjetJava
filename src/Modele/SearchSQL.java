@@ -54,7 +54,6 @@ public class SearchSQL {
             if(first) requete += " WHERE i.service LIKE ";
             else requete += " AND i.service LIKE";
             requete+="'%"+service+"%'";
-            first = false;
         }
         return requete;
     }   
@@ -91,7 +90,6 @@ public class SearchSQL {
             if(first) requete += " WHERE d.spe = ";
             else requete += " AND d.spe = ";
             requete+="'%"+spe+"%'";
-            first = false;
         }
         return requete;
     }
@@ -136,7 +134,6 @@ public class SearchSQL {
             if(first) requete += " WHERE mutuelle LIKE ";
             else requete += " AND mutuelle LIKE ";
             requete+="'%"+Mutuelle+"%'";
-            first = false;
         }
         return requete;
     }
@@ -152,27 +149,28 @@ public class SearchSQL {
     public String SearchChambre (String Numero_chambre,String service,String Surveillant,String nb_lits) {
         String requete;
         boolean first = true;
-        requete = "SELECT * FROM chambre c";
+        requete = "SELECT * FROM chambre";
         if(!service.isEmpty()){
-            if(first) requete += " WHERE c.service LIKE ";
-            else requete += " AND c.service LIKE";
+            if(first) requete += " WHERE code_service LIKE ";
+            else requete += " AND code_service LIKE";
             requete+="%"+service+"%";
             first = false;
         }
         if(!Surveillant.isEmpty()){
-            if(first) requete += " WHERE c.surveillant = ";
-            else requete += " AND c.surveillant =";
+            if(first) requete += " WHERE surveillant = ";
+            else requete += " AND surveillant =";
             requete+="%"+Surveillant+"%";
             first = false;
         }
         if(!nb_lits.isEmpty()){
-            if(first) requete += " WHERE c.nb_lits = ";
-            else requete += " AND c.nb_lits = ";
+            if(first) requete += " WHERE nb_lits = ";
+            else requete += " AND nb_lits = ";
             requete+="%"+nb_lits+"%";
-            first = false;
         }
         return requete;
     }   
+    
+    
     public String SearchService (String Nom,String batiment,String Directeur,String chambre) {
         String requete;
         boolean first = true;
@@ -198,9 +196,40 @@ public class SearchSQL {
          if(!chambre.isEmpty()){
             if(first) requete += " WHERE s.chambre = ";
             else requete += " AND s.chambre = ";
-            requete+="%"+chambre+"%";
-            first = false;
+            requete+="%"+chambre+"%";           
         }
         return requete;
-    }   
+    } 
+    
+    public String SearchHospitalisation(String Numero_malade, String Code_service, String Numero_chambre, String Lit) {
+        String requete;
+        boolean first = true;
+        requete = "SELECT * FROM hospitalisation ";
+        if(!Numero_malade.isEmpty()){
+            if(first) requete += " WHERE no_malade = ";
+            else requete += " AND no_malade = ";
+            requete+="%"+Numero_malade+"%";
+            first = false;
+        }
+        if(Code_service != null && !Code_service.isEmpty()){
+            if(first) requete += " WHERE code_service LIKE ";
+            else requete += " AND code_service LIKE ";
+            requete+="'%"+Code_service+"%'";
+            first = false;
+        }
+        if(!Numero_chambre.isEmpty()){
+            if(first) requete += " WHERE no_chambre = ";
+            else requete += " AND no_chambre =";
+            requete+="%"+Numero_chambre+"%";
+            first = false;
+        }
+        if(!Lit.isEmpty()){
+            if(first) requete += " WHERE lit = ";
+            else requete += " AND lit = ";
+            requete+="%"+Lit+"%";
+        }
+        return requete;
+    }  
+
+
 }

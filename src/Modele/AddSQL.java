@@ -16,7 +16,6 @@ import java.sql.*;
 public class AddSQL {
     
 
-    // Ajout dans table employé
     public String addEmploye(String Nom, String Prenom, String Tel, String Adresse){
         String requete;
         requete = "INSERT INTO employe (nom, prenom, adresse, tel) VALUES ( ";
@@ -142,6 +141,35 @@ public class AddSQL {
                
         return requete;
         
-    }       
+    } 
+    
+    // Ajout dans la table chambre
+    public String addHospi(String Numero_malade, String Code_service, String Numero_chambre, String Lit){        
+                
+        String requete = "INSERT INTO hospitalisation (no_malade, code_service, no_chambre, lit) VALUES ( ";       
+          
+        
+        requete += ""+Numero_malade+","; 
+        
+        
+        if (!Code_service.isEmpty()) {
+            requete += "'"+Code_service+"',";            
+        }
+        else requete += "NULL,";
+         
+        if (!Numero_chambre.isEmpty()) {
+            requete += ""+Numero_chambre+",";            
+        }
+        else requete += "NULL,";             
+        
+        if (!Lit.isEmpty()) {
+            requete += ""+Lit+");";            
+        }
+        else requete += "NULL);";         
+               
+        return requete;
+        
+    }
+
    
 }   

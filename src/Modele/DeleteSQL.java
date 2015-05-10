@@ -15,7 +15,7 @@ public class DeleteSQL {
         String[] requete = new String[2];
         
         requete[0] = "DELETE FROM employe WHERE numero = " + id;
-        requete[1] = "DELETE FROM infirmier WHERE numero = "+ id;
+        requete[1] = "DELETE FROM infirmier WHERE numero = " + id;
         
         return requete;
     }   
@@ -24,7 +24,7 @@ public class DeleteSQL {
         String[] requete = new String[2];
         
         requete[0] = "DELETE FROM employe WHERE numero = " + id;
-        requete[1] = "DELETE FROM docteur WHERE numero = "+ id;
+        requete[1] = "DELETE FROM docteur WHERE numero = " + id;
         
         return requete;
     }   
@@ -32,12 +32,12 @@ public class DeleteSQL {
     public String DeletePatient(int id) {
         String requete;
         
-        requete = "DELETE FROM malade WHERE numero = " + id;
-        
+        requete = "DELETE FROM malade WHERE numero = " + id;        
         
         return requete;
     }  
     
+    /*
     public String DeleteChambre (int id) {
         String requete;
         
@@ -45,14 +45,25 @@ public class DeleteSQL {
         
         
         return requete;
-    }   
-    public String DeleteService(String id) {
+    } */  
+    
+    /*public String DeleteService(String id) {
         String requete;
         
         requete = "DELETE FROM service WHERE code_service LIKE " + id;
         
         
         return requete;
-    }   
+    }*/
+    
+    public String DeleteHospi(String id) {
+        String requete;
+        
+        requete = "DELETE FROM hospitalisation WHERE no_malade = " + id;
+        
+        
+        return requete;
+    }
+
 }
 

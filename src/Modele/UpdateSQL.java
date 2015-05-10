@@ -64,4 +64,18 @@ public class UpdateSQL {
     }  
     
     
+    // Modification dans la table hospitalisation
+    public String updateHospi(String Numero_malade, String Code_service, String Numero_chambre, String Lit){        
+                
+        String requete;
+        requete = " UPDATE hospitalisation SET code_service = '"+ Code_service +"', " +
+                " no_chambre = '"+ Numero_chambre +"', " +
+                " lit = "+Lit+", " +
+            	" WHERE no_malade = "+Numero_malade+" ;";
+                    
+        return requete;
+    }  
+
+    
+    
 }
