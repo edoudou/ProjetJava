@@ -3,23 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Modele;
-
-import Classes.*;
-import java.io.*;
-import java.sql.*;
 
 /**
  *
  * @author Robin
  */
-public class SearchSQL {
+public class DeleteSQL {
     
-    public String SearchInfirmier (String Nom,String Prenom,String Tel,String Adresse,String Salaire,String service) {
+     public String DeleteInfirmier (String Nom,String Prenom,String Tel,String Adresse,String Salaire,String service) {
         String requete;
         boolean first = true;
-        requete = "SELECT * FROM Infirmier i JOIN Employe e ON i.numero=e.numero";
+        requete = "DELETE * FROM Infirmier i JOIN Employe e ON i.numero=e.numero";
         if(!Nom.isEmpty()){
             if(first) requete += " WHERE e.nom LIKE";
             else requete += " AND e.nom LIKE";
@@ -59,10 +54,10 @@ public class SearchSQL {
         return requete;
     }   
     
-    public String SearchDocteur(String Nom,String Prenom,String Tel,String Adresse,String spe) {
+    public String DeleteDocteur(String Nom,String Prenom,String Tel,String Adresse,String spe) {
         String requete;
         boolean first = true;
-        requete = "SELECT * FROM docteur d JOIN Employe e ON d.numero=e.numero";
+        requete = "DELETE * FROM docteur d JOIN Employe e ON d.numero=e.numero";
         if(!Nom.isEmpty()){
             if(first) requete += " WHERE e.nom LIKE";
             else requete += " AND e.nom LIKE";
@@ -96,10 +91,10 @@ public class SearchSQL {
         return requete;
     }   
     
-    public String SearchPatient(String Nom,String Prenom,String Tel,String Adresse,String Mutuelle) {
+    public String DeletePatient(String Nom,String Prenom,String Tel,String Adresse,String Mutuelle) {
         String requete;
         boolean first = true;
-        requete = "SELECT * FROM patient p JOIN Employe e ON p.numero=e.numero";
+        requete = "DELETE * FROM patient p JOIN Employe e ON p.numero=e.numero";
         if(!Nom.isEmpty()){
             if(first) requete += " WHERE e.nom LIKE";
             else requete += " AND e.nom LIKE";
@@ -133,10 +128,10 @@ public class SearchSQL {
         return requete;
     }  
     
-    public String SearchChambre (String Numero_chambre,String service,String Surveillant,String nb_lits) {
+    public String DeleteChambre (String Numero_chambre,String service,String Surveillant,String nb_lits) {
         String requete;
         boolean first = true;
-        requete = "SELECT * FROM chambre c";
+        requete = "DELETE * FROM chambre c";
         if(!service.isEmpty()){
             if(first) requete += " WHERE c.service LIKE ";
             else requete += " AND c.service LIKE";
@@ -157,10 +152,10 @@ public class SearchSQL {
         }
         return requete;
     }   
-    public String SearchService (String Nom,String batiment,String Directeur,String chambre) {
+    public String DeleteService (String Nom,String batiment,String Directeur,String chambre) {
         String requete;
         boolean first = true;
-        requete = "SELECT * FROM service s";
+        requete = "DELETE * FROM service s";
         if(!Nom.isEmpty()){
             if(first) requete += " WHERE s.nom LIKE ";
             else requete += " AND s.nom LIKE";
@@ -188,3 +183,4 @@ public class SearchSQL {
         return requete;
     }   
 }
+
