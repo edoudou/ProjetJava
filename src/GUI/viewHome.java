@@ -33,7 +33,7 @@ public class viewHome extends View{
         MDPSQL = new PasswordField();
         connect = new Button("Connexion");
         
-        content.getChildren().addAll(new Label(""),User,new Label(""),MDP,new Label(""),MDPSQL,connect);
+        content.getChildren().addAll(new Label("Nom d'utilisateur ECE"),User,new Label("Mot de passe ECE"),MDP,new Label("Mot de passe MySQL"),MDPSQL,connect);
         
         this.setContent(content);
     }
