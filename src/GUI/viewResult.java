@@ -65,6 +65,7 @@ public final class viewResult extends View{
     public void setDoctorResult(Docteur... docTab){
         tab = docTab;
         
+        table.getColumns().clear();
         nomCol = new TableColumn("Nom");
         prenomCol = new TableColumn("Prenom");
         table.getColumns().addAll(nomCol,prenomCol);
@@ -92,6 +93,7 @@ public final class viewResult extends View{
     public void setInfirmierResult(Infirmier... infTab){
         tab = infTab;
         
+        table.getColumns().clear();
         nomCol = new TableColumn("Nom");
         prenomCol = new TableColumn("Prenom");
         table.getColumns().addAll(nomCol,prenomCol);
@@ -119,6 +121,7 @@ public final class viewResult extends View{
     public void setPatientResult(Patient... patTab){
         tab = patTab;
         
+        table.getColumns().clear();
         nomCol = new TableColumn("Nom");
         prenomCol = new TableColumn("Prenom");
         table.getColumns().addAll(nomCol,prenomCol);
@@ -146,6 +149,7 @@ public final class viewResult extends View{
     public void setServiceResult(Service... servTab){
         tab = servTab;
         
+        table.getColumns().clear();
         nomCol = new TableColumn("Nom");
         prenomCol = new TableColumn("Prenom");
         table.getColumns().addAll(nomCol,prenomCol);

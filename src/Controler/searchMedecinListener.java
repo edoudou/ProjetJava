@@ -24,6 +24,7 @@ public class searchMedecinListener implements EventHandler<ActionEvent>{
     viewSearch DoctorView;
     GUI myGUI;
     connexion myCo;
+    SearchSQL search;
     
     public searchMedecinListener() {
     }
@@ -32,10 +33,11 @@ public class searchMedecinListener implements EventHandler<ActionEvent>{
         this.DoctorView = DoctorView;
     }
     
-    public searchMedecinListener(viewSearch DoctorView,GUI myGUI,connexion myCo) {
+    public searchMedecinListener(viewSearch DoctorView,GUI myGUI,connexion myCo,SearchSQL search) {
         this.DoctorView = DoctorView;
         this.myGUI = myGUI;
         this.myCo = myCo;
+        this.search = search;
     }
     
     @Override
@@ -56,10 +58,13 @@ public class searchMedecinListener implements EventHandler<ActionEvent>{
         
         ComboBox combo = (ComboBox) DoctorView.getTabNamed("Specialité").getData();
         if(combo!=null)spe = (String) combo.getValue();
+
         
-        System.out.println("To Do search Medecin named " + Nom + Prenom + " Tel : " + Tel + "/"+ Adresse);
+        String req = search.SearchDocteur(Nom, Prenom, Tel, Adresse, spe);
         
-        Docteur[] doc = myCo.SearchDoctor("SELECT * FROM docteur d JOIN employe e ON d.numero = e.numero");
+        System.out.println(req);
+        
+        Docteur[] doc = myCo.SearchDoctor(req);
         
         if(doc!=null)
         {

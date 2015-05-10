@@ -64,15 +64,15 @@ public class SearchSQL {
         boolean first = true;
         requete = "SELECT * FROM docteur d JOIN Employe e ON d.numero=e.numero";
         if(!Nom.isEmpty()){
-            if(first) requete += " WHERE e.nom LIKE";
-            else requete += " AND e.nom LIKE";
-            requete+= "%"+Nom+"%";
+            if(first) requete += " WHERE e.nom LIKE ";
+            else requete += " AND e.nom LIKE ";
+            requete+= "'%"+Nom+"%'";
             first = false;
         }
         if(!Prenom.isEmpty()){
             if(first) requete += " WHERE e.prenom LIKE ";
-            else requete += " AND e.prenom LIKE";
-            requete+="%"+Prenom+"%";
+            else requete += " AND e.prenom LIKE ";
+            requete+="'%"+Prenom+"%'";
             first = false;
         }
         if(!Tel.isEmpty()){
@@ -84,13 +84,13 @@ public class SearchSQL {
         if(!Adresse.isEmpty()){
             if(first) requete += " WHERE e.adresse LIKE ";
             else requete += " AND e.adresse LIKE ";
-            requete+="%"+Adresse+"%";
+            requete+="'%"+Adresse+"%'";
             first = false;
         }
-        if(!spe.isEmpty()){
+        if(spe!=null && !spe.isEmpty()){
             if(first) requete += " WHERE d.spe = ";
             else requete += " AND d.spe = ";
-            requete+="%"+spe+"%";
+            requete+="'%"+spe+"%'";
             first = false;
         }
         return requete;
