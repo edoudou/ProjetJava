@@ -99,7 +99,7 @@ public class SearchSQL {
     public String SearchDocteurOf(int id) {
         String requete;
         boolean first = true;
-        requete = "SELECT * FROM docteur d JOIN soigne s ON d.numero = no_docteur WHERE no_malade = " + id;
+        requete = "SELECT * FROM employe e JOIN(docteur d JOIN soigne s ON d.numero = no_docteur) ON e.numero = d.numero WHERE no_malade = " + id;
         
         return requete;
     }

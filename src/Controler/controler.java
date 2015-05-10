@@ -85,7 +85,7 @@ public final class controler {
     public void getDoctorOf(int id)
     {
         String req = searchGen.SearchDocteurOf(id);
-        
+        System.out.println(req);
         Docteur[] doc = myCo.SearchDoctor(req);
         if(doc!=null)
         {

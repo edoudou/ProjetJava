@@ -36,15 +36,16 @@ public class connexion {
             Statement requete = link.createStatement();
             ResultSet result = requete.executeQuery(req);
             
-            
             tabDoc = null;
-            for(int n = 1; result.next() ;n++){
-                Docteur[] tabCopy = tabDoc;
-                tabDoc = new Docteur[n];
-                
-                if(tabCopy!=null)System.arraycopy(tabCopy, 0, tabDoc, 0, n-1);
-                
-                tabDoc[n-1] = new Docteur(result.getString("specialite"),result.getInt("numero"),result.getString("nom"),result.getString("prenom"),result.getInt("tel"),result.getString("adresse"),new Patient[0]);
+            if(result!=null){
+                for(int n = 1; result.next() ;n++){
+                    Docteur[] tabCopy = tabDoc;
+                    tabDoc = new Docteur[n];
+
+                    if(tabCopy!=null)System.arraycopy(tabCopy, 0, tabDoc, 0, n-1);
+
+                    tabDoc[n-1] = new Docteur(result.getString("specialite"),result.getInt("numero"),result.getString("nom"),result.getString("prenom"),result.getInt("tel"),result.getString("adresse"),new Patient[0]);
+                }
             }
             
             return tabDoc;
