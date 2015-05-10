@@ -21,15 +21,15 @@ public class SearchSQL {
         boolean first = true;
         requete = "SELECT * FROM Infirmier i JOIN Employe e ON i.numero=e.numero";
         if(!Nom.isEmpty()){
-            if(first) requete += " WHERE e.nom LIKE";
-            else requete += " AND e.nom LIKE";
-            requete+= "%"+Nom+"%";
+            if(first) requete += " WHERE e.nom LIKE ";
+            else requete += " AND e.nom LIKE ";
+            requete+= "'%"+Nom+"%'";
             first = false;
         }
         if(!Prenom.isEmpty()){
             if(first) requete += " WHERE e.prenom LIKE ";
-            else requete += " AND e.prenom LIKE";
-            requete+="%"+Prenom+"%";
+            else requete += " AND e.prenom LIKE ";
+            requete+="'%"+Prenom+"%'";
             first = false;
         }
         if(!Tel.isEmpty()){
@@ -41,7 +41,7 @@ public class SearchSQL {
         if(!Adresse.isEmpty()){
             if(first) requete += " WHERE e.adresse LIKE ";
             else requete += " AND e.adresse LIKE ";
-            requete+="%"+Adresse+"%";
+            requete+="'%"+Adresse+"%'";
             first = false;
         }
         if(!Salaire.isEmpty()){
@@ -50,10 +50,10 @@ public class SearchSQL {
             requete+="%"+Salaire+"%";
             first = false;
         }
-        if(!service.isEmpty()){
+        if(service!=null && !service.isEmpty()){
             if(first) requete += " WHERE i.service LIKE ";
             else requete += " AND i.service LIKE";
-            requete+="%"+service+"%";
+            requete+="'%"+service+"%'";
             first = false;
         }
         return requete;

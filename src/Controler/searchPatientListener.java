@@ -5,7 +5,10 @@
  */
 package Controler;
 
+import GUI.GUI;
 import GUI.viewSearch;
+import Modele.SearchSQL;
+import Modele.connexion;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.ComboBox;
@@ -18,6 +21,9 @@ import javafx.scene.control.TextField;
 public class searchPatientListener implements EventHandler<ActionEvent>{
 
     viewSearch PatientView;
+    GUI myGUI;
+    connexion myCo;
+    SearchSQL search;
     
     public searchPatientListener() {
     }

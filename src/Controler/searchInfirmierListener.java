@@ -5,9 +5,13 @@
  */
 package Controler;
 
+import Classes.*;
+import GUI.GUI;
 import GUI.viewSearch;
+import Modele.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
@@ -18,12 +22,22 @@ import javafx.scene.control.TextField;
 public class searchInfirmierListener implements EventHandler<ActionEvent>{
 
     viewSearch InfirmierView;
+    GUI myGUI;
+    connexion myCo;
+    SearchSQL search;
     
-    public searchInfirmierListener() {
+    public searchInfirmierListener(){
     }
 
     public searchInfirmierListener(viewSearch InfirmierView) {
         this.InfirmierView = InfirmierView;
+    }
+
+    public searchInfirmierListener(viewSearch InfirmierView, GUI myGUI, connexion myCo, SearchSQL search) {
+        this.InfirmierView = InfirmierView;
+        this.myGUI = myGUI;
+        this.myCo = myCo;
+        this.search = search;
     }
     
     @Override
@@ -48,7 +62,20 @@ public class searchInfirmierListener implements EventHandler<ActionEvent>{
         ComboBox combo = (ComboBox) InfirmierView.getTabNamed("Service").getData();
         if(combo!=null)service = (String) combo.getValue();
         
-        System.out.println("To Do search Medecin named " + Nom + Prenom + " Tel : " + Tel + "/"+ Adresse);
+        String req = search.SearchInfirmier(Nom, Prenom, Tel, Adresse, Salaire, service);
+        
+        System.out.println(req);
+        
+        Infirmier[] inf = myCo.SearchInfirmier(req);
+        
+        if(inf!=null)
+        {
+            myGUI.getResult().setInfirmierResult(inf);
+        
+            myGUI.getLayout().setCenter((Node)myGUI.getResult());
+        }
+        
+        
     }
     
 }

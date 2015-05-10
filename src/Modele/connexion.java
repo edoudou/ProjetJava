@@ -58,4 +58,35 @@ public class connexion {
         return null;
     }
     
+    public Infirmier[] SearchInfirmier(String req){
+        Infirmier[] tabInf;
+        try {
+            Statement requete = link.createStatement();
+            ResultSet result = requete.executeQuery(req);
+            
+            
+            
+            tabInf = null;
+            for(int n = 1; result.next() ;n++){
+                
+                Infirmier[] tabCopy = tabInf;
+                tabInf = new Infirmier[n];
+                
+                if(tabCopy!=null)System.arraycopy(tabCopy, 0, tabInf, 0, n-1);
+                
+                System.out.println("test");
+                
+                tabInf[n-1] = new Infirmier(result.getString("code_service"),result.getString("rotation"),result.getDouble("salaire"),result.getInt("numero"),result.getString("nom"),result.getString("prenom"),result.getInt("tel"),result.getString("adresse"));
+                
+            }
+            
+            return tabInf;
+            
+        } catch (SQLException ex) {
+            System.out.println("Probleme de Creation de requete");
+        }
+        
+        return null;
+    }
+    
 }

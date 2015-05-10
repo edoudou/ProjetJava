@@ -11,7 +11,7 @@ package Classes;
  */
 public class Infirmier extends Employe {
     
-    private int Service;
+    private String Service;
     private String rotation;
     private double salaire;
     
@@ -19,14 +19,14 @@ public class Infirmier extends Employe {
         
     }
     
-    public Infirmier(int Service, String rotation, double salaire, int numero, String nomp, String prenomp, int tel, String adresse) {
+    public Infirmier(String Service, String rotation, double salaire, int numero, String nomp, String prenomp, int tel, String adresse) {
         super(numero, nomp, prenomp, tel, adresse);
         this.Service = Service;
         this.rotation = rotation;
         this.salaire = salaire;
     }
     
-    public void setInfirmier(int Service, String rotation, double salaire, int numero, String nomp, String prenomp, int tel, String adresse) {
+    public void setInfirmier(String Service, String rotation, double salaire, int numero, String nomp, String prenomp, int tel, String adresse) {
         super.setEmploye(numero, nomp, prenomp, tel, adresse);
         this.Service = Service;
         this.rotation = rotation;
