@@ -24,6 +24,7 @@ public class connexion {
         }
         try {
             link = DriverManager.getConnection("jdbc:mysql://localhost/test","root","");
+            //link = DriverManager.getConnection("jdbc:mysql://srv-webA2.ece.fr","short-rw","lzYKntDA");
             
         } catch (SQLException ex) {
             System.out.println("Probleme de connexion a la base de donnée");
