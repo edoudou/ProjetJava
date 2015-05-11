@@ -26,9 +26,10 @@ public class GUI extends Application{
 
     private viewInterface[] appViews;
     private viewResult result;
+    private viewReporting stat;
     private MenuBar myMenu;
-    private Menu HomeMenu,ServiceMenu,DoctorMenu,InfirmierMenu,PatientMenu;
-    private MenuItem HomeMenuItem,ServiceMenuItem,DoctorMenuItem,InfirmierMenuItem,PatientMenuItem;
+    private Menu HomeMenu,ServiceMenu,DoctorMenu,InfirmierMenu,PatientMenu,StatMenu;
+    private MenuItem HomeMenuItem,ServiceMenuItem,DoctorMenuItem,InfirmierMenuItem,PatientMenuItem,StatMenuItem;
     private controler myControler;
     private BorderPane layout;
     
@@ -53,12 +54,15 @@ public class GUI extends Application{
     public void start(Stage stage) throws Exception {
         stage.setTitle("Projet Java !");
         
+        
+        
         myMenu = new MenuBar();
-        HomeMenuItem = new MenuItem("Accueil");
-        DoctorMenuItem = new MenuItem("Medecin");
-        PatientMenuItem = new MenuItem("Patient");
-        InfirmierMenuItem = new MenuItem("Infirmier");
-        ServiceMenuItem = new MenuItem("Service");
+        HomeMenuItem = new MenuItem("Connexion");
+        DoctorMenuItem = new MenuItem("Chercher");
+        PatientMenuItem = new MenuItem("Chercher");
+        InfirmierMenuItem = new MenuItem("Chercher");
+        ServiceMenuItem = new MenuItem("Chercher");
+        StatMenuItem = new MenuItem("Voir");
         
         HomeMenu = new Menu("Accueil");
         HomeMenu.getItems().add(HomeMenuItem);
@@ -70,8 +74,10 @@ public class GUI extends Application{
         InfirmierMenu.getItems().add(InfirmierMenuItem);
         ServiceMenu = new Menu("Service");
         ServiceMenu.getItems().add(ServiceMenuItem);
+        StatMenu = new Menu("Stat");
+        StatMenu.getItems().add(StatMenuItem);
         
-        myMenu.getMenus().addAll(HomeMenu,DoctorMenu,PatientMenu,InfirmierMenu,ServiceMenu);
+        myMenu.getMenus().addAll(HomeMenu,DoctorMenu,PatientMenu,InfirmierMenu,ServiceMenu,StatMenu);
         
         
         StackPane root = new StackPane();
@@ -84,13 +90,16 @@ public class GUI extends Application{
         appViews[1] = new viewSearch();
         appViews[2] = new viewSearch();
         appViews[3] = new viewSearch();
-        appViews[4] = new viewSearch();
+        appViews[4] = new viewSearch("Service");
         
         result = new viewResult();
+        stat = new viewReporting();
         
         layout.setTop(myMenu);
         layout.setCenter((Node)appViews[0]);
         root.getChildren().add(layout);
+        
+        
         
         
         
@@ -100,9 +109,13 @@ public class GUI extends Application{
                              new GUIComponent(new TextField(),"Adresse"),
                              new GUIComponent(new ComboBox(
                                     FXCollections.observableArrayList(
-                                            "CAR",
-                                            "CHG",
-                                            "REA"
+                                            "Anesthesiste",
+                                            "Cardiologue",
+                                            "Orthopediste",
+                                            "Pneumologue",
+                                            "Radiologue",
+                                            "Traumatologue",
+                                            ""
                                             )),"Specialité"));
         
         appViews[2].addToTab(new GUIComponent(new TextField(),"Nom"),
@@ -120,30 +133,29 @@ public class GUI extends Application{
                                     FXCollections.observableArrayList(
                                             "CAR",
                                             "CHG",
-                                            "REA"
+                                            "REA",
+                                            ""
                                             )),"Service"));
         
         appViews[4].addToTab(new GUIComponent(new ComboBox(
                                     FXCollections.observableArrayList(
-                                            "Anesthesiste",
-                                            "Cardiologue",
-                                            "Generaliste",
-                                            "Orthopediste",
-                                            "Pneumologue",
-                                            "Traumatologue"
+                                            "CAR",
+                                            "CHG",
+                                            "REA",
+                                            ""
                                             )),"Nom"),
                              new GUIComponent(new TextField(),"Batiment"),
                              new GUIComponent(new TextField(),"Directeur"));
         
+        
+        
         stage.show();
-        
-        stage.setOnCloseRequest((event) -> {
-            System.out.println("Stage is closing");
-        });
-        
+
         myControler = new controler(this);
         
         result.setControl(myControler);
+        
+        myControler.report(stat);
         
         HomeMenuItem.setOnAction((event) -> {
             layout.setCenter((Node)appViews[0]);
@@ -165,6 +177,10 @@ public class GUI extends Application{
             layout.setCenter((Node)appViews[4]);
         }
         );
+        StatMenuItem.setOnAction((event) -> {
+            layout.setCenter((Node)stat);
+            myControler.report(stat);
+        });
         
     }
 

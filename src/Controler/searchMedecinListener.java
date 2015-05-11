@@ -62,8 +62,6 @@ public class searchMedecinListener implements EventHandler<ActionEvent>{
         
         String req = search.SearchDocteur(Nom, Prenom, Tel, Adresse, spe);
         
-        System.out.println(req);
-        
         Docteur[] doc = myCo.SearchDoctor(req);
         
         if(doc!=null)

@@ -5,8 +5,10 @@
  */
 package GUI;
 
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -25,6 +27,7 @@ public class viewSearch extends View{
 
     public viewSearch() {
         super();
+        
         this.add = new Button("Add");
         this.search = new Button("Search");
         
@@ -34,8 +37,43 @@ public class viewSearch extends View{
         
         BorderPane layout = new BorderPane();
         
+        /*content.setPadding(new Insets(20, 10, 50, 300));
+        bottomContent.setPadding(new Insets(20, 10, 50, 300));
+        */
         layout.setCenter(content);
         layout.setBottom(bottomContent);
+        
+        layout.setPadding(new Insets(20, 320, 290, 325));
+        
+        layout.setStyle("-fx-background-image: url(\"background.jpg\");-fx-background-size: 1000 800;-fx-background-position: center center;");
+        
+        this.setContent(layout);
+    }
+    public viewSearch(String name) {
+    
+        super();
+        this.name = name;
+        
+        if(name != "Service")
+            this.add = new Button("Add");
+        
+        this.search = new Button("Search");
+        
+        bottomContent = new VBox();
+        if(name != "Service")
+            bottomContent.getChildren().addAll(add,search);
+        else
+            bottomContent.getChildren().addAll(search);
+        BorderPane layout = new BorderPane();
+        
+        layout.setPadding(new Insets(20, 320, 290, 325));
+        
+        layout.setCenter(content);
+        layout.setBottom(bottomContent);
+        
+        
+        
+        layout.setStyle("-fx-background-image: url(\"background.jpg\");-fx-background-size: 1000 800;-fx-background-position: center center;");
         
         this.setContent(layout);
     }
@@ -57,10 +95,12 @@ public class viewSearch extends View{
         for(int i = 0;i < tab.length;i++)
             this.tab[i] = new GUIComponent(tab[i],"");
         
-        this.add = add;
+        if(name != "Service")
+            this.add = add;
         this.search = search;
         
-        content.getChildren().add(add);
+        if(name != "Service")
+            content.getChildren().add(add);
         content.getChildren().add(search);
     }
     

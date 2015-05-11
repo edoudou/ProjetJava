@@ -7,12 +7,16 @@ package GUI;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.TilePane;
+import javafx.scene.text.Font;
 
 /**
  *
@@ -23,19 +27,28 @@ public class viewHome extends View{
     private TextField User;
     private PasswordField MDP,MDPSQL;
     private Button connect;
-    
+    private BorderPane pane;
+    private Label Titre;
     public viewHome() {
         super();
         name = "Home";
+        
+        pane = new BorderPane();
         
         User = new TextField();
         MDP = new PasswordField();
         MDPSQL = new PasswordField();
         connect = new Button("Connexion");
+        Titre =new Label("Bienvenue sur le logiciel de gestion d'hopital");
         
-        content.getChildren().addAll(new Label("Nom d'utilisateur ECE"),User,new Label("Mot de passe ECE"),MDP,new Label("Mot de passe MySQL"),MDPSQL,connect);
+        content.getChildren().addAll(Titre,new Label("Bienvenue sur le logiciel de gestion d'hopital"),new Label("Nom d'utilisateur ECE"),User,new Label("Mot de passe ECE"),MDP,new Label("Mot de passe MySQL"),MDPSQL,connect);
         
-        this.setContent(content);
+        
+        content.setPadding(new Insets(20, 10, 50, 300));
+        
+        pane.setCenter(content);
+        content.getChildren().add(pane);
+        
     }
     
     public TextField getUser() {
@@ -59,15 +72,32 @@ public class viewHome extends View{
         super();
         this.name = name;
         
+        pane = new BorderPane();
+        
+        pane.prefHeight(600);
+        pane.prefWidth(800);
+        
         User = new TextField();
         MDP = new PasswordField();
         MDPSQL = new PasswordField();
         
         connect = new Button("Connexion");
+        Titre =new Label("Bienvenue sur le logiciel de gestion d'hopital");
         
-        content.getChildren().addAll(new Label("Nom d'utilisateur ECE"),User,new Label("Mot de passe ECE"),MDP,new Label("Mot de passe MySQL"),MDPSQL,connect);
+        Titre.setFont(new Font(20));
         
-        this.setContent(content);
+        content.getChildren().addAll(Titre,new Label("Nom d'utilisateur ECE"),User,new Label("Mot de passe ECE"),MDP,new Label("Mot de passe MySQL"),MDPSQL,connect);
+        
+        
+        content.setPadding(new Insets(20, 195, 290, 195));
+        
+        pane.setStyle("-fx-background-image: url(\"background.jpg\");-fx-background-size: 1000 800;-fx-background-position: center center;");
+        
+        pane.setCenter(content);
+        
+        
+        //pane.setStyle("-fx-background-image: url(\"background.jpg\");-fx-background-size: 800 600;-fx-background-position: center center;");
+        this.setContent(pane);
         
     }
     

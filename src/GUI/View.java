@@ -20,7 +20,4 @@ abstract class View extends ScrollPane implements viewInterface{
     public View() {
         content = new VBox();
     }
-    
-    
-    
 }

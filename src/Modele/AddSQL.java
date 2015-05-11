@@ -19,7 +19,6 @@ public class AddSQL {
     
     public void defineAI(int max){
         if(A_I<max)A_I = max;
-        System.out.println(A_I);
     }
 
     public String addEmploye(String Nom, String Prenom, String Tel, String Adresse){

@@ -6,6 +6,7 @@
 package Controler;
 
 import GUI.viewHome;
+import Modele.AddSQL;
 import Modele.connexion;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -20,6 +21,7 @@ import javafx.event.EventHandler;
 public class setLinkListener implements EventHandler<ActionEvent>{
     connexion myCo;
     viewHome myView;
+    AddSQL add;
 
     public setLinkListener(connexion myCo) {
         this.myCo = myCo;
@@ -28,6 +30,12 @@ public class setLinkListener implements EventHandler<ActionEvent>{
     public setLinkListener(connexion myCo, viewHome myView) {
         this.myCo = myCo;
         this.myView = myView;
+    }
+
+    public setLinkListener(connexion myCo, viewHome myView, AddSQL add) {
+        this.myCo = myCo;
+        this.myView = myView;
+        this.add = add;
     }
     
     
@@ -42,6 +50,8 @@ public class setLinkListener implements EventHandler<ActionEvent>{
                 myCo.setLinkECE(username, password, passwordSQL);
             else
                 myCo.setLink();
+            
+            add.defineAI(myCo.getA_I());
         } catch (SQLException ex) {
             System.out.println("Probleme de connection au serveur ECE");
         }

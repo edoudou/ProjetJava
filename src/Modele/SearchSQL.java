@@ -87,8 +87,8 @@ public class SearchSQL {
             first = false;
         }
         if(spe!=null && !spe.isEmpty()){
-            if(first) requete += " WHERE d.spe = ";
-            else requete += " AND d.spe = ";
+            if(first) requete += " WHERE d.specialite = ";
+            else requete += " AND d.specialite = ";
             requete+="'%"+spe+"%'";
         }
         return requete;
@@ -142,8 +142,7 @@ public class SearchSQL {
     
     public String SearchPatientOf(int id) {
         String requete;
-        boolean first = true;
-        requete = "SELECT * FROM malade p JOIN soigne s ON p.numero = no_malade WHERE no_docteur = " + id;
+        requete = "SELECT * FROM soigne so JOIN (malade m LEFT JOIN (hospitalisation h JOIN service s ON h.code_service = s.code) ON m.numero = h.no_malade) ON m.numero = so.no_malade WHERE so.no_docteur = " + id;
         
         return requete;
     }
@@ -176,29 +175,29 @@ public class SearchSQL {
     public String SearchService (String Nom,String batiment,String Directeur,String chambre) {
         String requete;
         boolean first = true;
-        requete = "SELECT * FROM service s";
+        requete = "SELECT * FROM service s LEFT JOIN employe e ON s.directeur = e.numero";
         if(Nom!=null&&!Nom.isEmpty()){
-            if(first) requete += " WHERE s.nom LIKE ";
-            else requete += " AND s.nom LIKE";
-            requete+="%"+Nom+"%";
+            if(first) requete += " WHERE s.code LIKE ";
+            else requete += " AND s.code LIKE";
+            requete+="'%"+Nom+"%'";
             first = false;
         }
         if(!batiment.isEmpty()){
             if(first) requete += " WHERE s.batiment = ";
             else requete += " AND s.batiment =";
-            requete+="%"+batiment+"%";
+            requete+="'%"+batiment+"%'";
             first = false;
         }
         if(!Directeur.isEmpty()){
-            if(first) requete += " WHERE s.directeur = ";
-            else requete += " AND s.directeur = ";
-            requete+="%"+Directeur+"%";
+            if(first) requete += " WHERE e.nom LIKE ";
+            else requete += " AND e.nom LIKE ";
+            requete+="'%"+Directeur+"%'";
             first = false;
         }
          if(!chambre.isEmpty()){
             if(first) requete += " WHERE s.chambre = ";
             else requete += " AND s.chambre = ";
-            requete+="%"+chambre+"%";           
+            requete+="'%"+chambre+"%'";           
         }
         return requete;
     } 

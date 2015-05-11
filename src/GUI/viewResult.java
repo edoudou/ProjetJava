@@ -18,6 +18,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 
@@ -28,18 +31,23 @@ import javafx.scene.layout.VBox;
 public final class viewResult extends View{
 
     private Object[] tab;
-    private TilePane pane;
+    private GridPane pane;
     private TableView table;
+    private AnchorPane anchor;
     private TableColumn nomCol,prenomCol;
     private VBox data,tableBox;
     private controler control;
 
     public viewResult() {
         
+        anchor = new AnchorPane();
+        pane = new GridPane();
+        ColumnConstraints column1 = new ColumnConstraints(399);
+
+        ColumnConstraints column2 = new ColumnConstraints(399);
+
+        pane.getColumnConstraints().addAll(column1, column2);
         
-        pane = new TilePane();
-        pane.setPrefColumns(2);
-        pane.setPrefRows(1);
         
         table = new TableView();
         tableBox = new VBox();
@@ -47,17 +55,24 @@ public final class viewResult extends View{
         data.setStyle("-fx-border-width: 3;-fx-border-color: black;-fx-pref-width : 50%");
         
         tableBox.getChildren().add(table);
-        pane.getChildren().add(tableBox);
-        pane.getChildren().add(data);
         
-        this.setContent(pane);
+        
+        
+        pane.add(tableBox,0,1);
+        pane.add(data,1,1);
+        
+        anchor.setStyle("-fx-background-image: url(\"background.jpg\");-fx-background-size: 1000 800;-fx-background-position: center center;");
+        
+        anchor.getChildren().add(pane);
+        
+        this.setContent(anchor);
         
         
         //test
         Docteur Doc1 = new Docteur();
-        Doc1.setDocteur("Ca", 0, "Short","Ed", 023452432, "1321",new Patient[0]);
+        Doc1.setDocteur("Ca", 0, "Short","Ed", 023452432, "1321");
         Docteur Doc2 = new Docteur();
-        Doc2.setDocteur("Ca", 0, "Moi","Oui Moi", 023452432, "1321",new Patient[0]);
+        Doc2.setDocteur("Ca", 0, "Moi","Oui Moi", 023452432, "1321");
         setDoctorResult(Doc1,Doc2);
     }
     
@@ -105,7 +120,24 @@ public final class viewResult extends View{
     public void setDoctorData(Docteur doc){
         data.getChildren().clear();
         if(doc!=null){
-            data.getChildren().addAll(new Label("Nom : "+doc.getNomp()),new Label("Prenom : "+doc.getPrenomp()),new Label("Adresse : "+doc.getAdresse()));
+            TextField nom,prenom,adresse,tel,spe;
+            nom = new TextField();
+            nom.setText(doc.getNomp());
+            prenom = new TextField();
+            prenom.setText(doc.getPrenomp());
+            adresse = new TextField();
+            adresse.setText(doc.getAdresse());
+            tel = new TextField();
+            tel.setText(String.valueOf(doc.getTel()));
+            spe = new TextField();
+            spe.setText(doc.getSpe());
+            
+            data.getChildren().addAll(new Label("Nom : "),nom,new Label("Prenom : "),prenom,new Label("Adresse : "),adresse,new Label("Telephone : "),tel,new Label("Specialite : "),spe);
+            Button up = new Button("Update");
+            up.setOnMouseClicked((event)->{
+                control.updateDoc(doc.getNumero(),nom.getText(),prenom.getText(),adresse.getText(),tel.getText(),spe.getText());
+            });
+            data.getChildren().add(up);
             Button getP = new Button("Voir les Patients");
             getP.setOnMouseClicked((event)->{
                 control.getPatientOf(doc.getNumero());
@@ -202,8 +234,25 @@ public final class viewResult extends View{
     
     public void setPatientData(Patient pat){
         data.getChildren().clear();
-        if(pat!=null){
-            data.getChildren().addAll(new Label("Nom : "+pat.getNomp()),new Label("Prenom : "+pat.getPrenomp()),new Label("Adresse : "+pat.getAdresse()));
+        if(pat!=null){TextField nom,prenom,adresse,mutuelle,tel;
+            nom = new TextField();
+            nom.setText(pat.getNomp());
+            prenom = new TextField();
+            prenom.setText(pat.getPrenomp());
+            adresse = new TextField();
+            adresse.setText(pat.getAdresse());
+            tel = new TextField();
+            tel.setText(String.valueOf(pat.getTel()));
+            mutuelle = new TextField();
+            mutuelle.setText(pat.getMutuelle());
+
+            
+            data.getChildren().addAll(new Label("Nom : "),nom,new Label("Prenom : "),prenom,new Label("Adresse : "),adresse,new Label("Telephone : "),tel,new Label("Mutuelle :"),mutuelle);
+            Button up = new Button("Update");
+            up.setOnMouseClicked((event)->{
+                control.updatePat(pat.getNumero(),nom.getText(),prenom.getText(),adresse.getText(),tel.getText(),mutuelle.getText());
+            });
+            data.getChildren().add(up);
             if(pat.getHospital()!=null)data.getChildren().addAll(new Label("Service : "+pat.getHospital().getCodeService()),new Label("Chambre : "+pat.getHospital().getNumero_chambre()),new Label("Lit : "+pat.getHospital().getNumero_chambre()));
             
             Button getDoc = new Button("Voir le(s) Docteur(s)");
@@ -212,7 +261,7 @@ public final class viewResult extends View{
             });
             Button del = new Button("Supprimer");
             del.setOnMouseClicked((event)->{
-                control.suppDocteur(pat.getNumero());
+                control.suppPatient(pat.getNumero());
             });
             data.getChildren().addAll(getDoc,del);
         }
@@ -245,7 +294,7 @@ public final class viewResult extends View{
     
     public void setServiceData(Service serv){
         data.getChildren().clear();
-        if(serv!=null)data.getChildren().addAll(new Label("Nom : "+serv.getNom()),new Label("Batiment : "+serv.getBatiment()));
+        if(serv!=null)data.getChildren().addAll(new Label("Code : "+serv.getCode()),new Label("Nom : "+serv.getNom()),new Label("Batiment : "+serv.getBatiment()),new Label("Directeur : "+serv.getDirecteur()));
     }
     
     @Override

@@ -56,8 +56,6 @@ public class searchServiceListener implements EventHandler<ActionEvent>{
         
         String req = search.SearchService(Nom,Batiment,Directeur,"");
         
-        System.out.println(req);
-        
         Service[] pat = myCo.SearchService(req);
         
         if(pat!=null)

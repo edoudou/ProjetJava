@@ -64,8 +64,6 @@ public class searchInfirmierListener implements EventHandler<ActionEvent>{
         
         String req = search.SearchInfirmier(Nom, Prenom, Tel, Adresse, Salaire, service);
         
-        System.out.println(req);
-        
         Infirmier[] inf = myCo.SearchInfirmier(req);
         
         if(inf!=null)

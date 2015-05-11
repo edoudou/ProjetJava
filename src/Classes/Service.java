@@ -14,7 +14,7 @@ public class Service {
     private String code;
     private String nom;
     private String batiment;
-    private Docteur Directeur;
+    private String Directeur;
     private int chambre;
     private Infirmier[] infirmier;
 
@@ -22,7 +22,16 @@ public class Service {
         
     }
     
-    public Service(String code, String nom, String batiment, Docteur Directeur, int chambre, Infirmier... infirmier) {
+    public Service(String code, String nom, String batiment, String Directeur, int chambre, Infirmier... infirmier) {
+        this.code = code;
+        this.nom = nom;
+        this.batiment = batiment;
+        this.Directeur = Directeur;
+        this.chambre = chambre;
+        this.infirmier = infirmier;
+    }
+    
+    public Service(String code, String nom, String batiment, String Directeur) {
         this.code = code;
         this.nom = nom;
         this.batiment = batiment;
@@ -31,7 +40,16 @@ public class Service {
         this.infirmier = infirmier;
     }
 
-    public void setService(String code, String nom, String batiment, Docteur Directeur, int chambre, Infirmier... infirmier) {
+    public void setService(String code, String nom, String batiment, String Directeur, int chambre, Infirmier... infirmier) {
+        this.code = code;
+        this.nom = nom;
+        this.batiment = batiment;
+        this.Directeur = Directeur;
+        this.chambre = chambre;
+        this.infirmier = infirmier;
+    }
+    
+    public void setService(String code, String nom, String batiment, String Directeur) {
         this.code = code;
         this.nom = nom;
         this.batiment = batiment;
@@ -51,7 +69,7 @@ public class Service {
         return batiment;
     }
 
-    public Docteur getDirecteur() {
+    public String getDirecteur() {
         return Directeur;
     }
 

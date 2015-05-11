@@ -6,6 +6,8 @@
 package Controler;
 
 import GUI.viewSearch;
+import Modele.AddSQL;
+import Modele.connexion;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.ComboBox;
@@ -18,12 +20,20 @@ import javafx.scene.control.TextField;
 public class addPatientListener implements EventHandler<ActionEvent>{
 
     viewSearch PatientView;
+    AddSQL add;
+    connexion myCo;
     
     public addPatientListener() {
     }
 
     public addPatientListener(viewSearch PatientView) {
         this.PatientView = PatientView;
+    }
+
+    public addPatientListener(viewSearch PatientView, AddSQL add, connexion myCo) {
+        this.PatientView = PatientView;
+        this.add = add;
+        this.myCo = myCo;
     }
     
     
@@ -47,8 +57,14 @@ public class addPatientListener implements EventHandler<ActionEvent>{
         Field = (TextField) PatientView.getTabNamed("Mutuelle").getData();
         if(Field!=null) Mutuelle = Field.getText();
         
-        System.out.println("To Do add Medecin named " + Nom + Prenom + " Tel : " + Tel +"/"+ Adresse);
-        
+        if(Nom!=null&&Prenom!=null&&Tel != null&&Adresse != null&&Mutuelle != null
+                &&!Nom.isEmpty()&&!Prenom.isEmpty()&&!Tel.isEmpty()&&!Adresse.isEmpty()&&!Mutuelle.isEmpty())
+        {
+            String req = add.addPatient(Nom, Prenom, Tel, Adresse,Mutuelle);
+            /*for(int i = 0;i < req.length;i++)
+                myCo.updateData(req[i]);*/
+            myCo.updateData(req);
+        }
     }
     
 }

@@ -6,6 +6,8 @@
 package Controler;
 
 import GUI.viewSearch;
+import Modele.AddSQL;
+import Modele.connexion;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.ComboBox;
@@ -18,12 +20,20 @@ import javafx.scene.control.TextField;
 public class addServiceListener implements EventHandler<ActionEvent>{
 
     viewSearch ServiceView;
+    AddSQL add;
+    connexion myCo;
     
     public addServiceListener() {
     }
 
     public addServiceListener(viewSearch ServiceView) {
         this.ServiceView = ServiceView;
+    }
+
+    public addServiceListener(viewSearch ServiceView, AddSQL add, connexion myCo) {
+        this.ServiceView = ServiceView;
+        this.add = add;
+        this.myCo = myCo;
     }
     
     
@@ -40,8 +50,6 @@ public class addServiceListener implements EventHandler<ActionEvent>{
         
         ComboBox combo = (ComboBox) ServiceView.getTabNamed("Nom").getData();
         if(combo!=null)Nom = (String) combo.getValue();
-        
-        System.out.println("To Do add Service named " + Nom );
         
     }
     

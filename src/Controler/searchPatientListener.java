@@ -61,8 +61,6 @@ public class searchPatientListener implements EventHandler<ActionEvent>{
         
         String req = search.SearchPatient(Nom, Prenom, Tel, Adresse,Mutuelle);
         
-        System.out.println(req);
-        
         Patient[] pat = myCo.SearchPatient(req);
         
         if(pat!=null)

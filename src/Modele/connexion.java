@@ -50,7 +50,7 @@ public class connexion {
 
                     if(tabCopy!=null)System.arraycopy(tabCopy, 0, tabDoc, 0, n-1);
 
-                    tabDoc[n-1] = new Docteur(result.getString("specialite"),result.getInt("numero"),result.getString("nom"),result.getString("prenom"),result.getInt("tel"),result.getString("adresse"),new Patient[0]);
+                    tabDoc[n-1] = new Docteur(result.getString("specialite"),result.getInt("numero"),result.getString("nom"),result.getString("prenom"),result.getInt("tel"),result.getString("adresse"));
                 }
             }
             
@@ -95,9 +95,10 @@ public class connexion {
     public Patient[] SearchPatient(String req){
         Patient[] tabPat;
         try {
+            
+            
             Statement requete = link.createStatement();
             ResultSet result = requete.executeQuery(req);
-            
             
             tabPat = null;
             for(int n = 1; result.next() ;n++){
@@ -124,9 +125,7 @@ public class connexion {
         try {
             Statement requete = link.createStatement();
             ResultSet result = requete.executeQuery(req);
-            
-            
-            
+
             tabPat = null;
             for(int n = 1; result.next() ;n++){
                 Service[] tabCopy = tabPat;
@@ -134,7 +133,7 @@ public class connexion {
                 
                 if(tabCopy!=null)System.arraycopy(tabCopy, 0, tabPat, 0, n-1);
                 
-                tabPat[n-1] = new Service(result.getString("code"),result.getString("nom"),result.getString("batiment"),null,0,null);
+                tabPat[n-1] = new Service(result.getString("code"),result.getString("s.nom"),result.getString("batiment"),result.getString("e.nom"));
             }
             
             return tabPat;
@@ -148,7 +147,6 @@ public class connexion {
     
     public boolean updateData(String req){
         try {
-            System.out.println(req);
             Statement requete = link.createStatement();
             requete.executeUpdate(req);
             return true;
@@ -202,5 +200,59 @@ public class connexion {
             System.out.println("Probleme de Creation de requete");
         }
         return -1;
+    }
+    
+    public String[][] getServicePatient(){
+        String[][] tab = new String[0][2];
+        try {
+            Statement requete = link.createStatement();
+            ResultSet result = requete.executeQuery("SELECT s.nom, count(m.numero) FROM service s LEFT JOIN (malade m JOIN hospitalisation h ON m.numero = h. no_malade) ON h.code_service = s.code GROUP BY s.nom");
+            
+            for(int n = 1; result.next() ;n++){
+                
+                String[][] tabCopy = tab;
+                
+
+                
+                tab = new String[n][2];
+                if(tabCopy!=null)System.arraycopy(tabCopy, 0, tab, 0, n-1);
+                tab[n-1][0] = result.getString("count(m.numero)");
+                tab[n-1][1] = result.getString("s.nom");
+            }
+            
+            return tab;
+            
+        } catch (SQLException ex) {
+            System.out.println("Probleme de Creation de requete");
+        }
+        return null;
+    }
+    
+    public String[][] getDoctorPatient(){
+        String[][] tab = null;
+        try {
+            Statement requete = link.createStatement();
+            ResultSet result = requete.executeQuery("SELECT e.nom, count(m.numero) FROM (employe e JOIN docteur d ON d.numero = e.numero)LEFT JOIN (malade m JOIN soigne s ON m.numero = no_malade) ON e.numero = no_docteur GROUP BY e.nom");
+
+            
+            for(int n = 1; result.next() ;n++){
+                
+                
+                String[][] tabCopy = tab;
+                
+                tab = new String[n][2];
+                if(tabCopy!=null)System.arraycopy(tabCopy, 0, tab, 0, n-1);
+
+                
+                tab[n-1][0] = result.getString("count(m.numero)");
+                tab[n-1][1] = result.getString("e.nom");
+            }
+            
+            return tab;
+            
+        } catch (SQLException ex) {
+            System.out.println("Probleme de Creation de requete");
+        }
+        return null;
     }
 }
